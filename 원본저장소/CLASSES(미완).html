@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>거인 세계 - 병과</title>
+
+    <!-- 공식 사이트에서 사용하는 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Zen+Kaku+Gothic+Antique:wght@500;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* 아이콘 폰트 불러오기 */
+        @import url(https://cdn.jsdelivr.net/gh/sygnas/font-arrows@1.5.0/style.css);
+
+        /* --- 1. 배경 및 전체 레이아웃 --- */
+        body {
+            background-image: url(https://shingeki.tv/movie_final/img/common/bg_stone_dark.webp);
+            background-repeat: repeat; background-position: center center;
+            background-color: #000; color: #fff; font-family: 'Zen Kaku Gothic Antique', sans-serif;
+            margin: 0; padding-top: 7rem;
+        }
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url(https://shingeki.tv/movie_final/img/common/bg_wing.webp);
+            background-repeat: no-repeat; background-position: left top;
+            background-size: 55vw auto; z-index: -1; pointer-events: none;
+        }
+        .l-wrapper { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        /* --- 2. 상단 내비게이션 바 --- */
+        .c-header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 3rem; height: 6rem;
+            background-image: linear-gradient(to bottom, #000, rgba(0,0,0,0.8) 74%, transparent);
+            box-sizing: border-box;
+        }
+        .c-header__logo a, .c-mainmenu__link { font-family: "Cormorant", serif; text-decoration: none; color: #fff; font-weight: 700; transition: color 0.3s; }
+        .c-header__logo a { font-size: 2.2rem; }
+        .c-mainmenu { display: flex; list-style-type: none; margin: 0; padding: 0; gap: 2rem; }
+        .c-mainmenu__link { font-size: 1rem; }
+        .c-mainmenu__link:hover { color: #d50707; }
+        .c-mainmenu__link.active { border-bottom: 1px solid #d50707; }
+
+        /* --- 3. 메인 타이틀 --- */
+        .c-content-title {
+            position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+            line-height: 1; margin-top: 4rem; margin-bottom: 5rem;
+        }
+        .c-content-title__en { color: #fff; opacity: .15; font-size: 6rem; font-family: "Cormorant", serif; }
+        .c-content-title__ja { margin-top: -1.2em; color: #fff; font-size: 1.8rem; font-weight: 700; }
+
+        /* --- 4. 뷰 전환을 위한 기본 스타일 --- */
+        .hidden { display: none !important; }
+        .visible { display: block; animation: fadeIn 0.5s forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- 5. 병과 리스트 (CHARACTER 스타일) --- */
+        .class-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2.8rem;
+        }
+        .class-list__item {
+            display: block; text-decoration: none; color: #fff;
+            transition: opacity 0.3s;
+        }
+        .class-list__item:hover { opacity: 0.3; }
+        .class-list__item img { width: 100%; height: auto;  aspect-ratio: 1/1; object-fit: cover;}
+        .class-list__caption {
+            display: flex; flex-direction: column;
+            margin-top: 1rem; line-height: 1; text-align: center;
+        }
+        .class-list__name-ja {
+            font-size: 1.2rem; letter-spacing: 0.1em;
+            font-family: 'Nanum Myeongjo', serif; font-weight: 700;
+        }
+        .class-list__name-en {
+             margin-top: 0.4rem; font-size: 0.9rem; color: #999;
+             font-family: "Cormorant", serif;
+        }
+
+        /* --- 6. 병과 상세 (NEWS ARCHIVE 스타일) --- */
+        .c-article-header {
+            padding-bottom: 2rem; margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .c-article-header__meta { display: flex; gap: 1em; color: #ccc; font-family: "Cormorant", serif; }
+        .c-article-header__category { color: #d50707; font-weight: bold; }
+        .c-article-header__main-title { font-size: 2.2rem; margin-top: 1rem; font-family: 'Nanum Myeongjo', serif; }
+
+        .c-article-body h3 {
+            font-size: 1.5rem; font-weight: 700; color: #eee; margin-top: 2.5rem; margin-bottom: 1.5rem;
+            padding-left: 1rem; border-left: 3px solid #d50707;
+        }
+        .c-article-body dl { margin-bottom: 1.5rem; }
+        .c-article-body dt { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+        .c-article-body dd { font-size: 0.95rem; line-height: 1.8; color: #ccc; margin-left: 1rem; }
+        
+        .c-btn {
+            position: relative; display: block; width: fit-content;
+            padding: .8em 2em; text-decoration: none; transition: .2s;
+            font-weight: 700;
+        }
+        .c-btn--en { font-family: "Cormorant", serif; }
+        .c-btn--text { color: #fff; }
+        .c-btn--prev { padding-left: 3em; }
+        .c-btn--prev::before {
+            font-family: "arrows"; content: "\e925"; font-size: 0.8em;
+            position: absolute; left: 1.5em; top: 50%;
+            transform: translateY(-50%); transition: .3s;
+        }
+        .c-btn--prev:hover::before { transform: translateY(-50%) translateX(-5px); }
+        .c-btn--text:hover { color: #d50707; }
+        
+        .u-ft-sz_l1 { font-size: 1.4rem; }
+        .u-mg_auto { margin-left: auto; margin-right: auto; }
+        .u-mg_t_l6 { margin-top: 4rem; }
+
+        /* --- 7. 하단(푸터) 스타일 --- */
+        .c-footer {
+            margin-top: 6rem; padding-top: 9rem; padding-bottom: 4rem; background-color: #000;
+            background-image: url(https://shingeki.tv/movie_final/img/common/footer_bg_bottom.webp);
+            background-size: max(100vw, 600px); background-position: center bottom; background-repeat: no-repeat;
+            mask-image: url(https://shingeki.tv/movie_final/img/common/footer_bg_top.webp), linear-gradient(to bottom, transparent 15%, #000 15%);
+            mask-size: max(100vw, 600px) auto, 100% 100%;
+            mask-position: top center, center; mask-repeat: no-repeat;
+        }
+        .c-footer__copyright { font-size: 0.8rem; text-align: center; color: #ccc; }
+
+        /* --- 모바일 화면 대응 --- */
+        @media (max-width: 768px) {
+            body { padding-top: 5rem; }
+            body::before { background-size: 100vw auto; }
+            .l-wrapper { padding: 1rem; }
+            .c-header { padding: 1rem; height: auto; }
+            .c-header__logo a { font-size: 1.2rem; }
+            .c-mainmenu { display: none; }
+            .c-content-title__en { font-size: 3rem; }
+            .c-content-title__ja { font-size: 1.2rem; }
+            .class-list { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="c-header">
+        <h1 class="c-header__logo"><a href="#">거인 세계 TRPG</a></h1>
+        <nav>
+            <ul class="c-mainmenu">
+                <li><a href="#" class="c-mainmenu__link">HOME</a></li>
+                <li><a href="#" class="c-mainmenu__link">WORLD</a></li>
+                <li><a href="#" class="c-mainmenu__link">SYSTEM</a></li>
+                <li><a href="#" class="c-mainmenu__link active">CLASSES</a></li>
+                <li><a href="#" class="c-mainmenu__link">SPECIAL</a></li>
+                <li><a href="#" class="c-mainmenu__link">NEWS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="l-wrapper">
+        <h1 class="c-content-title">
+            <span class="c-content-title__en">CLASSES</span>
+            <span class="c-content-title__ja">병과</span>
+        </h1>
+
+        <div id="view-container">
+            <div id="class-list-view">
+                <div class="class-list">
+                    <!-- [수정] 깨지지 않는 placeholder 이미지로 교체 -->
+                    <a href="#" class="class-list__item" data-class="scout"><img src="https://picsum.photos/seed/scout/400" alt="척후병"><div class="class-list__caption"><span class="class-list__name-ja">척후병</span><span class="class-list__name-en">Scout</span></div></a>
+                    <a href="#" class="class-list__item" data-class="assault"><img src="https://picsum.photos/seed/assault/400" alt="강습병"><div class="class-list__caption"><span class="class-list__name-ja">강습병</span><span class="class-list__name-en">Assault</span></div></a>
+                    <a href="#" class="class-list__item" data-class="operator"><img src="https://picsum.photos/seed/operator/400" alt="작전병"><div class="class-list__caption"><span class="class-list__name-ja">작전병</span><span class="class-list__name-en">Operator</span></div></a>
+                    <a href="#" class="class-list__item" data-class="leader"><img src="https://picsum.photos/seed/leader/400" alt="분대장"><div class="class-list__caption"><span class="class-list__name-ja">분대장</span><span class="class-list__name-en">Leader</span></div></a>
+                    <a href="#" class="class-list__item" data-class="veteran"><img src="https://picsum.photos/seed/veteran/400" alt="백전병"><div class="class-list__caption"><span class="class-list__name-ja">백전병</span><span class="class-list__name-en">Veteran</span></div></a>
+                    <a href="#" class="class-list__item" data-class="inheritor"><img src="https://picsum.photos/seed/inheritor/400" alt="계승자"><div class="class-list__caption"><span class="class-list__name-ja">계승자</span><span class="class-list__name-en">Inheritor</span></div></a>
+                </div>
+            </div>
+
+            <div id="class-detail-view" class="hidden">
+                <div id="detail-content-wrapper"></div>
+                <nav class="u-mg_t_l6">
+                    <a href="#" id="back-to-list-btn" class="c-btn c-btn--en c-btn--text c-btn--prev u-ft-sz_l1 u-mg_auto">Back</a>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <footer class="c-footer">
+        <p class="c-footer__copyright">Ⓒ 거인 세계 TRPG (Your Name or Circle Name)</p>
+    </footer>
+
+    <!-- 각 병과의 상세 내용을 담고 있는 템플릿 (숨겨진 상태) -->
+    <div id="class-templates" class="hidden">
+        <div data-class-template="scout"><article class="c-article"><header class="c-article-header"><div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span>인류의 눈, 미지의 영역을 개척하는 선두주자</span></div><h1 class="c-article-header__main-title">척후병 (Scout)</h1></header><div class="c-article-body"><h3>시작 기술</h3><dl><dt>곡예 기동</dt><dd>전투 중 무모하고 화려한 기동을 선보일 때, [입체기동술] 판정. 거인 하나를 표적으로 만듭니다.</dd></dl><dl><dt>선행 정찰</dt><dd>입체기동장치로 적진 깊숙이 정찰할 때, [입체기동술] 판정. 전방의 거인 수와 위치 정보를 얻습니다.</dd></dl><h3>고급 기술</h3><dl><dt>돌파</dt><dd>입체기동장치로 거인 무리를 뚫고 지나갑니다.</dd></dl><dl><dt>기회 포착</dt><dd>회피 판정에서 12+가 나왔을 때, 반격하며 거인을 표적으로 만듭니다.</dd></dl></div></article></div>
+        <div data-class-template="assault"><article class="c-article"><header class="c-article-header"><div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span>거인 구축에 모든 것을 건, 인류 최강의 칼날</span></div><h1 class="c-article-header__main-title">강습병 (Assault)</h1></header><div class="c-article-body"><h3>시작 기술</h3><dl><dt>선봉 돌격</dt><dd>압도적인 공세로 전투를 시작할 때, [토벌기술] 판정. 표적 없이 거인에게 피해를 주거나, 표적을 소모해 일격에 구축합니다.</dd></dl><dl><dt>연속 공격</dt><dd>거인에게 결정타를 날리면, 즉시 근처의 다른 거인 하나를 표적으로 만듭니다.</dd></dl><h3>고급 기술</h3><dl><dt>위압</dt><dd>누군가를 위협하여 당신의 목표에 협력하게 합니다.</dd></dl><dl><dt>급소 절단</dt><dd>결정타 판정에서 12+가 나왔을 때, 거인을 즉시 구축할 수 있습니다.</dd></dl></div></article></div>
+        <div data-class-template="operator"><article class="c-article"><header class="c-article-header"><div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span>전장의 체스 마스터, 생존 확률을 계산하는 전략가</span></div><h1 class="c-article-header__main-title">작전병 (Operator)</h1></header><div class="c-article-body"><h3>시작 기술</h3><dl><dt>작전 수립</dt><dd>잠시 계획을 세워 '권한'을 얻습니다. 권한을 소모하여 동료의 판정 실패를 부분 성공으로 바꿀 수 있습니다.</dd></dl><dl><dt>약점 간파</dt><dd>공격할 적절한 순간을 노려, 동료가 공격할 수 있는 표적을 만듭니다.</dd></dl><h3>고급 기술</h3><dl><dt>전장의 직감</dt><dd>상황 파악 기술 사용 시 질문을 하나 더 할 수 있습니다.</dd></dl><dl><dt>신호를 기다려</dt><dd>매복 작전을 펼쳐 적들을 표적으로 만듭니다.</dd></dl></div></article></div>
+        <div data-class-template="leader"><article class="c-article"><header class="c-article-header"><div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span>전우의 목숨은 내 목숨보다 소중하다, 분대를 이끄는 리더</span></div><h1 class="c-article-header__main-title">분대장 (Leader)</h1></header><div class="c-article-body"><h3>시작 기술</h3><dl><dt>영웅적 구조</dt><dd>필사의 구조 기술의 성공률이 높아지며, 실패 시에도 동료를 구해내는 대신 자신이 위험에 빠집니다.</dd></dl><dl><dt>전의 고취</dt><dd>작전 전 연설을 통해 동료들의 첫 판정에 +1 보너스를 부여합니다.</dd></dl><h3>고급 기술</h3><dl><dt>정신 차려</dt><dd>공황에 빠진 동료를 진정시킵니다.</dd></dl><dl><dt>응급 처치</dt><dd>부상당한 동료를 치료하여 전투 페널티를 제거합니다.</dd></dl></div></article></div>
+        <div data-class-template="veteran"><article class="c-article"><header class="c-article-header"><div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span>지옥에서 살아 돌아온, 죽음과 가장 가까운 베테랑</span></div><h1 class="c-article-header__main-title">백전병 (Veteran)</h1></header><div class="c-article-body"><h3>시작 기술</h3><dl><dt>도발</dt><dd>치명적인 적의 주의를 자신에게 끌어 동료를 보호하고, 동시에 적을 표적으로 만듭니다.</dd></dl><dl><dt>사투 (死鬪)</dt><dd>죽음을 눈앞에 두고 필사적으로 공격하여 위기에서 벗어납니다.</dd></dl><h3>고급 기술</h3><dl><dt>생존 본능</dt><dd>회피 기술을 사용할 때, [입체기동술] 대신 [투지]로 판정할 수 있습니다.</dd></dl><dl><dt>불굴의 육체</dt><dd>심각한 부상을 입었을 때, 일시적으로 부상과 페널티를 모두 무시할 수 있습니다.</dd></dl></div></article></div>
+        <div data-class-template="inheritor"><article class="c-article"><header class="c-article-header"><div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span>거인의 힘을 품은, 인류의 마지막 희망이자 최대의 불안 요소</span></div><h1 class="c-article-header__main-title">계승자 (Inheritor)</h1></header><div class="c-article-body"><h3>시작 기술</h3><dl><dt>거인화</dt><dd>자해를 통해 거인으로 변신합니다. '권한'을 얻어 경이로운 힘을 발휘하거나, 표적 없이 거인을 즉시 구축할 수 있습니다. (※ 게임 시작 시 선택 불가)</dd></dl><h3>고급 기술</h3><dl><dt>재생</dt><dd>인간 상태로 휴식하면 정신적/신체적 페널티를 모두 제거합니다.</dd></dl><dl><dt>거인의 힘</dt><dd>거인 상태일 때, 들어오는 공격의 피해를 완전히 무시할 수 있습니다.</dd></dl><dl><dt>특이 형태</dt><dd>갑옷, 초대형, 초재생 등 자신의 거인이 가진 특수한 능력을 발동할 수 있습니다.</dd></dl></div></article></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const listView = document.getElementById('class-list-view');
+            const detailView = document.getElementById('class-detail-view');
+            const detailWrapper = document.getElementById('detail-content-wrapper');
+            const classLinks = document.querySelectorAll('.class-list__item');
+            const backBtn = document.getElementById('back-to-list-btn');
+
+            classLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const className = this.getAttribute('data-class');
+                    const template = document.querySelector(`#class-templates [data-class-template="${className}"]`);
+                    if (template) {
+                        detailWrapper.innerHTML = template.innerHTML;
+                        listView.classList.add('hidden');
+                        detailView.classList.remove('hidden');
+                        detailView.classList.add('visible');
+                        window.scrollTo(0, 0);
+                    }
+                });
+            });
+
+            backBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                detailView.classList.add('hidden');
+                listView.classList.remove('hidden');
+                listView.classList.add('visible');
+                detailWrapper.innerHTML = '';
+            });
+        });
+    </script>
+</body>
+</html>

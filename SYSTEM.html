@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자유의 날개 - 시스템</title>
+
+<!-- 1. 모든 폰트 서버에 최대한 빨리 연결 신호를 보냄 (Preconnect) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <!-- 2. 모든 폰트 CSS 파일을 병렬로, 우선적으로 불러옴 (@import 제거) -->
+    <!-- 구글 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Nanum+Myeongjo:wght@400;700&family=Zen+Kaku+Gothic+Antique:wght@500;700&display=block" rel="stylesheet">
+    <!-- 아이콘 폰트 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sygnas/font-arrows@1.5.0/style.css">
+    
+    <!-- 3. 메인 스타일시트 링크 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="system-page">
+    <!-- ===== 로딩 오버레이 시작 ===== -->
+    <div id="loading-overlay" class="hidden">
+        <div class="spinner"></div>
+    </div>
+    <!-- ===== 로딩 오버레이 끝 ===== -->
+
+    <!-- ===== 모바일 메뉴 패널 ===== -->
+    <div class="c-mobile-nav">
+        <button type="button" class="c-mobile-nav__close-btn" aria-label="메뉴 닫기">&times;</button>
+        <nav>
+            <ul class="c-mobile-nav__menu">
+                <li><a href="HOME.html" class="c-mainmenu__link">HOME</a></li>
+                <li><a href="WORLD.html" class="c-mainmenu__link">WORLD</a></li>
+                <li><a href="SYSTEM.html" class="c-mainmenu__link">SYSTEM</a></li>
+                <li><a href="CLASSES(미완).html" class="c-mainmenu__link">CLASSES</a></li>
+                <li><a href="SPECIAL.html" class="c-mainmenu__link">SPECIAL</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- ===== 모바일 메뉴 패널 끝 ===== -->
+
+
+    <header class="c-header">
+        <h1 class="c-header__logo"><a href="#"><img src="images/logo.png" alt="자유의 날개"></a></h1>
+        <!-- [추가] 햄버거 메뉴 버튼 -->
+        <button type="button" class="c-hamburger-btn" aria-label="메뉴 열기">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="c-pc-nav">
+            <ul class="c-mainmenu">
+                <li><a href="HOME.html" class="c-mainmenu__link">HOME</a></li>
+                <li><a href="WORLD.html" class="c-mainmenu__link">WORLD</a></li>
+                <li><a href="SYSTEM.html" class="c-mainmenu__link active">SYSTEM</a></li>
+                <li><a href="CLASSES(미완).html" class="c-mainmenu__link">CLASSES</a></li>
+                <li><a href="SPECIAL.html" class="c-mainmenu__link">SPECIAL</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="l-wrapper" id="main-content">
+        <h1 class="c-content-title">
+            <span class="c-content-title__en">SYSTEM</span>
+            <span class="c-content-title__ja">시스템</span>
+        </h1>
+
+        <div class="c-tabmenu-wrapper">
+            <ul class="c-tabmenu" id="system-tabs">
+                <li><a class="c-tabmenu__link" data-tab="stats">핵심 역량</a></li>
+                <li><a class="c-tabmenu__link" data-tab="creation">캐릭터 생성</a></li>
+                <li><a class="c-tabmenu__link" data-tab="rules">장비 및 규칙</a></li>
+                <li><a class="c-tabmenu__link" data-tab="combat">거인 및 전투</a></li>
+                <li><a class="c-tabmenu__link" data-tab="moves">기본 기술</a></li>
+            </ul>
+        </div>
+
+        <div id="system-content-area">
+
+            <!-- 1. 핵심 역량 (STATS) 콘텐츠 -->
+            <div class="system-content" data-tab-content="stats">
+                <section class="news-list">
+                    <div class="news-item"><span class="news-item__category">입체기동술<br>(Agility)</span><span class="news-item__title">입체기동장치를 신체 일부처럼 다루는 기술. 가스 소모 최적화, 거인 공격 예측, 효율적인 경로 탐색 등 모든 공중 기동 능력을 포함합니다.<br><strong>척후병(Scout)</strong>의 핵심 역량입니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">토벌기술<br>(Execution)</span><span class="news-item__title">거인의 약점인 '목덜미'를 정확하고 신속하게 베어내는 살상 기술. 냉철한 판단력과 급소를 노리는 정밀함을 포함합니다.<br><strong>강습병(Assault)</strong>의 핵심 역량입니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">상황판단<br>(Awareness)</span><span class="news-item__title">혼돈의 전장에서 생존에 직결되는 정보를 취사선택하는 능력. 변하는 전황을 파악하여 가장 합리적인 다음 행동을 도출하는 통찰력입니다.<br><strong>작전병(Strategist)</strong>의 핵심 역량입니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">의지<br>(Discipline)</span><span class="news-item__title">절망적인 상황에서도 무너지지 않고 자신과 동료를 지탱하는 정신력. 동료의 죽음 앞에서도 전투를 포기하지 않는 이타적인 용기입니다.<br><strong>분대장(Leader)</strong>의 핵심 역량입니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">투지<br>(Rage)</span><span class="news-item__title">거인을 향한 불타는 증오이자, 죽음의 공포를 밀어내는 생존 본능. 궁지에 몰릴수록 더욱 강해지는 처절한 저항 정신입니다.<br><strong>백전병(Veteran)</strong>과 <strong>계승자(Successor)</strong>의 핵심 역량입니다.</span></div>
+                </section>
+            </div>
+
+            <!-- 2. 캐릭터 생성 콘텐츠 -->
+            <div class="system-content" data-tab-content="creation">
+                <section class="news-list">
+                    <div class="news-item"><span class="news-item__category">신병<br>(Rookie)</span><span class="news-item__title">능력치(<strong>+2, +1, +1, +0, -1</strong>) 배분, 이름만 결정합니다.<br><strong>행운은 0</strong>에서 시작하며, 레벨 1이 될 때까지 기본 기술만 사용하고 <strong>항상 표적 상태</strong>로 전투를 시작합니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">정식 병사<br>(Advanced)</span><span class="news-item__title">이름, 성, 배경, 성격을 모두 정하고 <strong>레벨 1</strong>에서 시작합니다.<br><strong>행운은 2</strong>에서 시작하며, 병과를 선택하고 시작 기술 2개를 모두 얻습니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">레벨 업<br>(Level Up)</span><span class="news-item__title">임무에서 생환할 때마다 레벨이 1 오르며, 행운이 2로 회복됩니다. 레벨 2 이상부터 핵심 역량 강화, 고급 기술 습득 등 다양한 방법으로 캐릭터를 성장시킬 수 있습니다.</span></div>
+                </section>
+            </div>
+
+            <!-- 3. 장비 및 규칙 콘텐츠 -->
+            <div class="system-content" data-tab-content="rules">
+                <section class="news-list">
+                    <div class="news-item"><span class="news-item__category">기본 판정</span><span class="news-item__title">주사위 2개(2d6)를 굴려 나온 값에 자신의 능력치를 더합니다.<br><ul><li><strong>10 이상:</strong> 완전한 성공</li><li><strong>7-9:</strong> 대가를 치르는 성공 (부분 성공)</li><li><strong>6 이하:</strong> 실패</li></ul></span></div>
+                    <div class="news-item"><span class="news-item__category">기본 장비</span><span class="news-item__title"><strong>입체기동장치</strong>와 <strong>초경질 블레이드 2자루</strong>를 기본으로 휴대합니다.<br>칼날은 소모품이며, 여러 개의 교체용 칼날을 함께 소지합니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">추가 장비</span><span class="news-item__title">여분 칼날, 가스, 소총 등을 휴대할 수 있습니다. 1개까지는 페널티가 없으나, 2개 이상부터 기동에 방해가 되어 <strong>입체기동술에 -1 지속 페널티</strong>를 받습니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">행운<br>(Luck)</span><span class="news-item__title">판정 직후, 결과를 확인하고 나서 <strong>행운 1</strong>을 소모하여 최종 결과를 최대 12까지 높일 수 있습니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">표적<br>(Mark)</span><span class="news-item__title">죽음의 위기에 직접 노출되었음을 의미합니다. 거인을 공격하거나, 거인에게 공격당하기 위해서는 반드시 <strong>'표적'</strong> 상태가 되어야 합니다.</span></div>
+                </section>
+            </div>
+
+            <!-- 4. 거인 및 전투 콘텐츠 -->
+            <div class="system-content" data-tab-content="combat">
+                <section class="news-list">
+                    <div class="news-item">
+                        <span class="news-item__category">거인 사냥법</span>
+                        <span class="news-item__title">
+                            거인을 죽이려면 일반적으로 2번의 [결정타] 성공이 필요합니다. 매 공격 전에는 반드시 거인을 '표적' 상태로 만들어야 합니다.
+                            <ol style="margin-top: 8px; padding-left: 20px;">
+                                <li><strong>거인 표적화:</strong> [진입] 기술 등으로 거인을 '표적' 상태로 만듭니다.</li>
+                                <li><strong>첫 번째 결정타:</strong> '표적'이 된 거인에게 [결정타]를 성공시켜 자세를 무너뜨립니다. 공격 후 '표적'은 사라집니다.</li>
+                                <li><strong>다시 표적화:</strong> 마무리를 위해 다시 거인을 '표적' 상태로 만듭니다.</li>
+                                <li><strong>두 번째 결정타:</strong> 다시 '표적'이 된 거인의 목덜미에 [결정타]를 성공시키면 거인을 구축(驅逐)합니다.</li>
+                            </ol>
+                        </span>
+                    </div>
+                    <div class="news-item"><span class="news-item__category">특수 거인</span><span class="news-item__title"><strong>기행종, 갑옷 거인, 재생 특화 거인, 지성 거인</strong> 등 다양한 특수 개체가 존재하며, 일반적인 방법으로는 상대하기 어렵습니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">죽음<br>(Death)</span><span class="news-item__title">병사는 '표적' 상태일 때만 죽음의 위험에 처합니다. 거인에게 붙잡히는 등 최후의 순간에는 [죽음 극복] 기술로 생존을 시도할 수 있으며, 여기서 실패하면 죽음을 맞이합니다.</span></div>
+                </section>
+            </div>
+
+            <!-- 5. 기본 기술 콘텐츠 -->
+            <div class="system-content" data-tab-content="moves">
+                <section class="news-list">
+                    <div class="news-item"><span class="news-item__category">진입</span><span class="news-item__title">입체기동장치로 거인을 공격할 위치를 확보하려 할 때 [입체기동술] 판정.<ul><li><strong>10+:</strong> 거인을 표적으로 만듭니다.</li><li><strong>7-9:</strong> 거인을 표적으로 만들지만 대가를 치릅니다.</li></ul></span></div>
+                    <div class="news-item"><span class="news-item__category">결정타</span><span class="news-item__title">표적이 된 거인에게 치명타를 날리려 할 때 [토벌기술] 판정.<ul><li><strong>10+:</strong> 거인에게 피해를 줍니다 (혹은 구축).</li><li><strong>7-9:</strong> 성공하지만 대가를 치릅니다.</li></ul></span></div>
+                    <div class="news-item"><span class="news-item__category">회피</span><span class="news-item__title">다가오는 위험을 피하려 할 때 [입체기동술] 판정.<ul><li><strong>10+:</strong> 위협에서 벗어나고 표적 상태가 해제됩니다.</li><li><strong>7-9:</strong> 위험은 피하지만, 표적 상태가 유지되거나 페널티를 받습니다.</li></ul></span></div>
+                    <div class="news-item"><span class="news-item__category">상황 파악</span><span class="news-item__title">전황을 더 잘 이해하려 할 때 [상황판단] 판정.<ul><li><strong>10+:</strong> 유용한 정보 2가지를 얻습니다.</li><li><strong>7-9:</strong> 유용한 정보 1가지를 얻습니다.(예: 가장 안전한 탈출 경로는?)</li></ul></span></div>                    
+                    <div class="news-item"><span class="news-item__category">필사의 구조</span><span class="news-item__title">죽음 직전의 동료를 구할 때 [의지] 판정.<ul><li><strong>10+:</strong> 동료를 구하고 무사히 탈출합니다.</li><li><strong>7-9:</strong> 동료는 구하지만, 이제 당신이 대신 위험에 처합니다.</li></ul></span></div>
+                    <div class="news-item"><span class="news-item__category">죽음 극복</span><span class="news-item__title">치명적인 위험에서 벗어나려 할 때 [투지] 판정.<ul><li><strong>10+:</strong> 위기에서 벗어납니다.</li><li><strong>7-9:</strong> 힘겹게 생존하지만 상황이 악화됩니다.</li><li><strong>6-:</strong> 죽습니다.</li></ul></span></div>
+                </section>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="c-footer">
+        <p class="c-footer__copyright">
+            본 사이트는 원작 '진격의 거인'과 기존 팬메이드 TRPG 시스템을 기반으로 한 비영리 2차 창작 프로젝트입니다.<br>
+            '진격의 거인' ©Hajime Isayama, KODANSHA/"ATTACK ON TITAN" The Final Season Production Committee. All Rights Reserved.<br>
+            원작자 측의 요청이 있을 시 본 사이트는 예고 없이 비공개 처리될 수 있습니다.
+        </p>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

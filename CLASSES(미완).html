@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자유의 날개 - 병과</title>
+
+<!-- 1. 모든 폰트 서버에 최대한 빨리 연결 신호를 보냄 (Preconnect) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <!-- 2. 모든 폰트 CSS 파일을 병렬로, 우선적으로 불러옴 (@import 제거) -->
+    <!-- 구글 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Nanum+Myeongjo:wght@400;700&family=Zen+Kaku+Gothic+Antique:wght@500;700&display=block" rel="stylesheet">
+    <!-- 아이콘 폰트 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sygnas/font-arrows@1.5.0/style.css">
+    
+    <!-- 3. 메인 스타일시트 링크 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ===== 로딩 오버레이 시작 ===== -->
+    <div id="loading-overlay" class="hidden">
+        <div class="spinner"></div>
+    </div>
+    <!-- ===== 로딩 오버레이 끝 ===== -->
+
+    <!-- ===== 모바일 메뉴 패널 ===== -->
+    <div class="c-mobile-nav">
+        <button type="button" class="c-mobile-nav__close-btn" aria-label="메뉴 닫기">&times;</button>
+        <nav>
+            <ul class="c-mobile-nav__menu">
+                <li><a href="HOME.html" class="c-mainmenu__link">HOME</a></li>
+                <li><a href="WORLD.html" class="c-mainmenu__link">WORLD</a></li>
+                <li><a href="SYSTEM.html" class="c-mainmenu__link">SYSTEM</a></li>
+                <li><a href="CLASSES(미완).html" class="c-mainmenu__link">CLASSES</a></li>
+                <li><a href="SPECIAL.html" class="c-mainmenu__link">SPECIAL</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- ===== 모바일 메뉴 패널 끝 ===== -->
+     
+    <header class="c-header">
+        <h1 class="c-header__logo"><a href="#"><img src="images/logo.png" alt="자유의 날개"></a></h1>
+        <!-- [추가] 햄버거 메뉴 버튼 -->
+        <button type="button" class="c-hamburger-btn" aria-label="메뉴 열기">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="c-pc-nav">
+            <ul class="c-mainmenu">
+                <li><a href="HOME.html" class="c-mainmenu__link">HOME</a></li>
+                <li><a href="WORLD.html" class="c-mainmenu__link">WORLD</a></li>
+                <li><a href="SYSTEM.html" class="c-mainmenu__link">SYSTEM</a></li>
+                <li><a href="CLASSES(미완).html" class="c-mainmenu__link active">CLASSES</a></li>
+                <li><a href="SPECIAL.html" class="c-mainmenu__link">SPECIAL</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="l-wrapper">
+        <h1 class="c-content-title">
+            <span class="c-content-title__en">CLASSES</span>
+            <span class="c-content-title__ja">병과</span>
+        </h1>
+
+        <div id="view-container">
+            <div id="class-list-view">
+                <div class="class-list">
+                    <!-- [수정] 깨지지 않는 placeholder 이미지로 교체 -->
+                    <a href="#" class="class-list__item" data-class="scout"><img src="https://picsum.photos/seed/scout/400" alt="척후병"><div class="class-list__caption"><span class="class-list__name-ja">척후병</span><span class="class-list__name-en">Scout</span></div></a>
+                    <a href="#" class="class-list__item" data-class="assault"><img src="https://picsum.photos/seed/assault/400" alt="강습병"><div class="class-list__caption"><span class="class-list__name-ja">강습병</span><span class="class-list__name-en">Assault</span></div></a>
+                    <a href="#" class="class-list__item" data-class="operator"><img src="https://picsum.photos/seed/operator/400" alt="작전병"><div class="class-list__caption"><span class="class-list__name-ja">작전병</span><span class="class-list__name-en">Operator</span></div></a>
+                    <a href="#" class="class-list__item" data-class="leader"><img src="https://picsum.photos/seed/leader/400" alt="분대장"><div class="class-list__caption"><span class="class-list__name-ja">분대장</span><span class="class-list__name-en">Leader</span></div></a>
+                    <a href="#" class="class-list__item" data-class="veteran"><img src="https://picsum.photos/seed/veteran/400" alt="백전병"><div class="class-list__caption"><span class="class-list__name-ja">백전병</span><span class="class-list__name-en">Veteran</span></div></a>
+                    <a href="#" class="class-list__item" data-class="inheritor"><img src="https://picsum.photos/seed/inheritor/400" alt="계승자"><div class="class-list__caption"><span class="class-list__name-ja">계승자</span><span class="class-list__name-en">Inheritor</span></div></a>
+                </div>
+            </div>
+
+            <div id="class-detail-view" class="hidden">
+                <div id="detail-content-wrapper"></div>
+                <nav class="u-mg_t_l6">
+                    <a href="#" id="back-to-list-btn" class="c-btn c-btn--en c-btn--text c-btn--prev u-ft-sz_l1 u-mg_auto">Back</a>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <footer class="c-footer">
+        <p class="c-footer__copyright">
+    본 사이트는 원작 '진격의 거인'과 기존 팬메이드 TRPG 시스템을 기반으로 한 비영리 2차 창작 프로젝트입니다.<br>
+    '진격의 거인' ©Hajime Isayama, KODANSHA/"ATTACK ON TITAN" The Final Season Production Committee. All Rights Reserved.<br>
+    원작자 측의 요청이 있을 시 본 사이트는 예고 없이 비공개 처리될 수 있습니다.
+</p>
+    </footer>
+
+    <!-- 각 병과의 상세 내용을 담고 있는 템플릿 (숨겨진 상태) -->
+    <div id="class-templates" class="hidden">
+        
+        <div data-class-template="scout">
+            <article class="c-article">
+                <header class="c-article-header">
+                    <div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span><strong>인류의 눈, 미지의 영역을 개척하는 선두주자</strong></span></div>
+                    <h1 class="c-article-header__main-title">척후병 (Scout)</h1>
+                </header>
+                <div class="c-article-body">
+                    <p>타의 추종을 불허하는 입체기동술을 바탕으로 작전 구역을 가장 먼저 정찰하고, 거인 무리의 규모와 위치를 파악하여 아군에게 생존에 필요한 정보를 전달합니다. 전장에서 가장 빠르고 화려하게 움직이며 거인들을 교란하는 역할을 수행합니다.</p>
+                    <p><strong>핵심 역량:</strong> 입체기동술 (Agility)</p>
+                    <hr class="c-divider" style="margin: 2em 0;">
+                    <h3>시작 기술</h3>
+                    <dl>
+                        <dt>곡예 기동</dt>
+                        <dd>
+                            <p>전투 중 무모하고 화려한 기동을 선보일 때, <strong>[입체기동술]</strong> 판정을 합니다. 결과와 상관없이 거인 하나를 <strong>표적</strong>으로 만듭니다.</p>
+                            <ul>
+                                <li><strong>10+:</strong> 아래 목록에서 2가지를 선택합니다.</li>
+                                <li><strong>7-9:</strong> 1가지를 선택합니다. 하지만 적들의 시선을 끌어 당신도 <strong>표적</strong> 상태가 됩니다.
+                                    <ul>
+                                        <li>적의 손이 닿지 않는 안전한 곳에 착지합니다.</li>
+                                        <li>거인 하나가 당신의 움직임에 혼란스러워하며 잠시 공격을 멈춥니다.</li>
+                                        <li>짜릿한 흥분 덕분에, 이 기술로 만든 표적을 이용하는 다음 판정에 <strong>+1 보너스</strong>를 받습니다.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </dd>
+                        <dt>선행 정찰</dt>
+                        <dd>
+                            <p>입체기동장치로 적진 깊숙이 정찰할 때, <strong>[입체기동술]</strong> 판정을 합니다.</p>
+                            <ul>
+                                <li><strong>10+:</strong> 전방의 거인 수와 위치에 대한 정확한 정보를 얻습니다.</li>
+                                <li><strong>7-9:</strong> 거인에게 발각됩니다. 불완전한 정보만 갖고 즉시 후퇴하거나, 적의 공격을 감수하고 정찰을 계속해야 합니다.</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <h3>고급 기술</h3>
+                    <dl>
+                        <dt>돌파</dt><dd style="margin-bottom: 1.5em;">입체기동장치로 거인 무리를 뚫고 지나갈 때, <strong>[입체기동술]</strong> 판정을 합니다. 10+가 나오면 반대편으로 무사히 통과합니다. 7-9가 나오면 통과하지만 착지 실패, 장비 과부하, 가스 고갈 등의 대가를 치릅니다.</dd>
+                        <dt>기회 포착</dt><dd style="margin-bottom: 1.5em;"><strong>회피</strong> 판정에서 12 이상이 나왔을 때, 단순히 피하는 데 그치지 않고 즉시 반격할 수 있는 위치로 이동하며 해당 거인을 <strong>표적</strong>으로 만들 수 있습니다.</dd>
+                        <dt>지형 기동</dt><dd style="margin-bottom: 1.5em;">주변에 높은 건물이나 숲 등 오를 만한 지형이 있다면, 입체기동장치가 없거나 가스가 떨어진 상황에서도 <strong>진입</strong>이나 <strong>결정타</strong> 기술을 사용할 수 있습니다.</dd>
+                        <dt>신속 토벌</dt><dd style="margin-bottom: 1.5em;">당신의 토벌 기술은 힘이 아닌 속도에서 나옵니다. <strong>결정타</strong> 기술을 사용할 때, [토벌기술] 대신 <strong>[입체기동술]</strong>로 판정할 수 있습니다.</dd>
+                    </dl>
+                </div>
+            </article>
+        </div>
+        
+        <div data-class-template="assault">
+            <article class="c-article">
+                <header class="c-article-header">
+                    <div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span><strong>거인 구축에 모든 것을 건, 인류 최강의 칼날</strong></span></div>
+                    <h1 class="c-article-header__main-title">강습병 (Assault)</h1>
+                </header>
+                <div class="c-article-body">
+                    <p>복잡한 전술보다 압도적인 토벌기술로 정면의 거인을 베어 넘기는 데 특화된 병사입니다. 전투의 흐름을 바꾸는 결정적인 한 방을 위해 항상 공격의 선봉에 서며, 동료들이 나아갈 길을 열어줍니다.</p>
+                    <p><strong>핵심 역량:</strong> 토벌기술 (Execution)</p>
+                    <hr class="c-divider" style="margin: 2em 0;">
+                    <h3>시작 기술</h3>
+                    <dl>
+                        <dt>선봉 돌격</dt>
+                        <dd>
+                            <p>압도적인 공세로 전투를 시작하기 위해 팀보다 앞서 돌격할 때, <strong>[토벌기술]</strong> 판정을 합니다.</p>
+                            <ul>
+                                <li><strong>10+:</strong> <strong>표적</strong> 상태가 아닌 거인에게도 즉시 피해를 줍니다. 만약 이미 확보된 <strong>표적</strong>을 소모하면, 단 일격에 거인을 구축할 수 있습니다.</li>
+                                <li><strong>7-9:</strong> 공격은 성공하지만, 예상보다 많은 적에게 포위당해 <strong>표적</strong>이 되거나, 몸을 혹사하여 입체기동술에 페널티를 받거나, 마지막 칼날이 부러지는 대가를 치릅니다.</li>
+                            </ul>
+                        </dd>
+                        <dt>연속 공격</dt>
+                        <dd>거인 하나에게 성공적으로 <strong>결정타</strong>를 날리면, 그 추진력을 이용해 즉시 근처에 있는 다른 거인 하나를 <strong>표적</strong>으로 만듭니다.</dd>
+                    </dl>
+                    <h3>고급 기술</h3>
+                    <dl>
+                        <dt>위압</dt><dd style="margin-bottom: 1.5em;">누군가를 위협하여 당신의 당면 목표에 협력하게 만들 때, <strong>[토벌기술]</strong> 판정을 합니다. 10+가 나오면 상대는 당신의 살기에 굴복하여 협력합니다. 7-9가 나오면 협력하지는 않되 방해하지 않거나, 나중에 복수를 꾀하는 등 불완전한 결과로 이어집니다.</dd>
+                        <dt>최단 경로</dt><dd style="margin-bottom: 1.5em;">거인에게 붙잡힌 동료를 구하기 위해 해당 거인을 공격할 때, <strong>[토벌기술]</strong> 판정을 합니다. 10+가 나오면 동료는 무사히 구조되고 거인은 구축됩니다. 7-9가 나오면 동료를 구하는 데 성공하지만, 동료가 부상을 입거나 거인을 완전히 죽이지 못하는 등 아슬아슬한 결과가 나옵니다.</dd>
+                        <dt>실전 교육</dt><dd style="margin-bottom: 1.5em;">동료에게 전투 기술에 대해 뼈아픈 교훈(물리적, 언어적 모두 가능)을 주면, 그 동료는 다음 <strong>토벌기술</strong> 판정에 <strong>+1 보너스</strong>를 받습니다.</dd>
+                        <dt>급소 절단</dt><dd style="margin-bottom: 1.5em;"><strong>결정타</strong> 판정에서 12 이상이 나왔을 때, 거인의 자세를 무너뜨리는 중간 과정 없이 즉시 구축할 수 있습니다.</dd>
+                    </dl>
+                </div>
+            </article>
+        </div>
+        
+        <div data-class-template="operator">
+            <article class="c-article">
+                <header class="c-article-header">
+                    <div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span><strong>전장의 체스 마스터, 생존 확률을 계산하는 전략가</strong></span></div>
+                    <h1 class="c-article-header__main-title">작전병 (Operator)</h1>
+                </header>
+                <div class="c-article-body">
+                    <p>뛰어난 상황판단 능력으로 혼돈의 전장에서 변수를 통제하고 아군의 생존 확률을 극대화합니다. 거인의 행동 패턴을 분석하여 약점을 동료에게 알리고, 작전의 성공률을 높이는 지휘관의 그림자입니다.</p>
+                    <p><strong>핵심 역량:</strong> 상황판단 (Awareness)</p>
+                    <hr class="c-divider" style="margin: 2em 0;">
+                    <h3>시작 기술</h3>
+                    <dl>
+                        <dt>작전 수립</dt>
+                        <dd>
+                            <p>특정 목표를 위해 잠시 전황을 살피고 계획을 세울 때, <strong>[상황판단]</strong> 판정을 합니다.</p>
+                            <ul>
+                                <li><strong>10+:</strong> '권한' 2개를 얻습니다.</li>
+                                <li><strong>7-9:</strong> '권한' 1개를 얻습니다.</li>
+                            </ul>
+                            <p>작전 실행 중 <strong>'권한' 1개를 소모</strong>하여, 동료 한 명의 판정 실패(6 이하)를 대가를 치르는 성공(7-9)으로 바꿀 수 있습니다.</p>
+                        </dd>
+                        <dt>약점 간파</dt>
+                        <dd>
+                            <p>공격할 적절한 순간을 냉정하게 노릴 때, <strong>[상황판단]</strong> 판정을 합니다.</p>
+                            <ul>
+                                <li><strong>10+:</strong> 근처 거인 하나를 <strong>표적</strong>으로 만듭니다. 이 표적은 당신이 아닌 동료가 공격해야 합니다.</li>
+                                <li><strong>7-9:</strong> 거인을 <strong>표적</strong>으로 만들지만, 이 기회는 순식간에 사라집니다. 동료가 즉시 공격하지 않으면 기회를 놓치게 됩니다.</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <h3>고급 기술</h3>
+                    <dl>
+                        <dt>전장의 직감</dt><dd style="margin-bottom: 1.5em;"><strong>상황 파악</strong> 기술을 사용할 때, 7 이상이 나오면 GM에게 할 수 있는 질문을 하나 더 할 수 있습니다.</dd>
+                        <dt>신호를 기다려</dt><dd style="margin-bottom: 1.5em;">팀을 지휘하여 매복 작전을 펼칠 때, <strong>[상황판단]</strong> 판정을 합니다. 10+가 나오면 매복에 걸린 모든 적이 <strong>표적</strong>이 됩니다. 7-9가 나오면 한 명의 적만 표적이 되거나, 예상치 못한 방향에서 다른 적의 공격을 받는 등 불완전한 성공이 됩니다.</dd>
+                        <dt>상부에 보고</dt><dd style="margin-bottom: 1.5em;">지휘관에게 당신의 계획을 설명하고 설득할 때, <strong>[상황판단]</strong> 판정을 합니다. 10+가 나오면 작전에 필요한 모든 자원을 지원받을 것입니다. 7-9가 나오면 지원을 받기 위해 계획의 타당성을 증명하거나 추가적인 목표를 부여받습니다.</dd>
+                        <dt>지원군 요청</dt><dd style="margin-bottom: 1.5em;">작전 전에 다른 팀과 협력할 때, <strong>[상황판단]</strong> 판정을 하여 '권한'을 얻습니다. 작전 중 결정적인 순간에 권한을 소모하여 다른 팀의 지원(사격, 미끼 등)을 받을 수 있습니다.</dd>
+                    </dl>
+                </div>
+            </article>
+        </div>
+        
+        <div data-class-template="leader">
+            <article class="c-article">
+                <header class="c-article-header">
+                    <div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span><strong>전우의 목숨은 내 목숨보다 소중하다, 분대를 이끄는 리더</strong></span></div>
+                    <h1 class="c-article-header__main-title">분대장 (Leader)</h1>
+                </header>
+                <div class="c-article-body">
+                    <p>강한 의지와 희생정신을 바탕으로 분대원들의 신뢰를 한 몸에 받는 지휘관입니다. 개인의 무력보다는 팀의 생존과 사기 진작에 집중하며, 절망적인 상황 속에서도 동료들을 이끌고 앞으로 나아갑니다.</p>
+                    <p><strong>핵심 역량:</strong> 의지 (Discipline)</p>
+                    <hr class="c-divider" style="margin: 2em 0;">
+                    <h3>시작 기술</h3>
+                    <dl>
+                        <dt>영웅적 구조</dt>
+                        <dd>
+                            <p><strong>필사의 구조</strong> 기술을 사용할 때, 동료는 항상 구조되며, 결과가 다음과 같이 바뀝니다.</p>
+                            <ul>
+                                <li><strong>10+:</strong> 동료를 구하고 무사히 탈출합니다.</li>
+                                <li><strong>7-9:</strong> 무사히 탈출하지는 못하지만, 최소한 살아남습니다. 당신은 <strong>표적</strong> 상태가 됩니다.</li>
+                                <li><strong>6-:</strong> 동료를 구해내는 바로 그 순간, 당신이 대신 치명적인 위험에 빠집니다.</li>
+                            </ul>
+                        </dd>
+                        <dt>전의 고취</dt>
+                        <dd>작전을 시작하기 전, 분대원들에게 영감을 주는 연설을 합니다. 당신의 말을 들은 각 사람은 작전 중 <strong>첫 판정에 +1 보너스</strong>를 받습니다.</dd>
+                    </dl>
+                    <h3>고급 기술</h3>
+                    <dl>
+                        <dt>정신 차려</dt><dd style="margin-bottom: 1.5em;">공황에 빠진 동료를 진정시킬 때, <strong>[의지]</strong> 판정을 합니다. 10+가 나오면 동료는 즉시 공황 상태에서 벗어납니다. 7-9가 나오면 동료는 진정되지만, 당신의 정신력이 소모되어 일시적으로 의지에 페널티를 받습니다.</dd>
+                        <dt>호흡을 맞춰</dt><dd style="margin-bottom: 1.5em;">동료와 완벽한 타이밍으로 함께 공격할 때, <strong>[의지]</strong> 판정을 합니다. 10+가 나오면 거인은 <strong>표적</strong>이 되고, 동료는 해당 거인에 대한 다음 공격에 <strong>+1 보너스</strong>를 받습니다. 7-9가 나오면 성공하지만 당신이나 동료 중 한 명이 위험에 노출됩니다.</dd>
+                        <dt>응급 처치</dt><dd style="margin-bottom: 1.5em;">전투 중 잠시 짬을 내어 부상당한 동료를 치료할 때, <strong>[의지]</strong> 판정을 합니다. 10+가 나오면 신체적 부상으로 인한 지속 페널티가 모두 제거됩니다. 7-9가 나오면 페널티는 사라지지만, 나중에 재발할 수 있는 임시방편에 그칩니다.</dd>
+                        <dt>지휘부의 신뢰</dt><dd style="margin-bottom: 1.5em;">임무를 성공적으로 완수하면, 다음 임무를 받기 전에 지휘부에 어떤 요청(정보, 자원, 인력 등)을 하든 그들은 당신을 믿고 들어줄 것입니다.</dd>
+                    </dl>
+                </div>
+            </article>
+        </div>
+        
+        <div data-class-template="veteran">
+            <article class="c-article">
+                <header class="c-article-header">
+                    <div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span><strong>지옥에서 살아 돌아온, 죽음과 가장 가까운 베테랑</strong></span></div>
+                    <h1 class="c-article-header__main-title">백전병 (Veteran)</h1>
+                </header>
+                <div class="c-article-body">
+                    <p>불굴의 투지로 수많은 사선을 넘어온 병사입니다. 전투 기술뿐만 아니라 살아남는 방법에 통달해 있으며, 절체절명의 순간에 경험에서 우러나오는 생존 본능으로 위기를 타개합니다. 죽음의 공포를 분노로 승화시키는 존재입니다.</p>
+                    <p><strong>핵심 역량:</strong> 투지 (Rage)</p>
+                    <hr class="c-divider" style="margin: 2em 0;">
+                    <h3>시작 기술</h3>
+                    <dl>
+                        <dt>도발</dt>
+                        <dd>
+                            <p>치명적인 적의 주의를 끌기 위해 의도적으로 행동할 때, <strong>[투지]</strong> 판정을 합니다.</p>
+                            <ul>
+                                <li><strong>10+:</strong> 적들의 모든 주의를 당신에게 집중시킵니다. 동료에게 걸린 <strong>표적</strong> 상태를 자신에게 옮겨오고, 동시에 그들을 노리던 적을 <strong>표적</strong>으로 만듭니다.</li>
+                                <li><strong>7-9:</strong> 당신과 적은 서로를 <strong>표적</strong>으로 만들거나, 동료를 보호하지만 반격할 기회는 잡지 못하는 등 불완전한 결과를 선택합니다.</li>
+                            </ul>
+                        </dd>
+                        <dt>사투 (死鬪)</dt>
+                        <dd>
+                            <p>죽음을 눈앞에 두고 거인에게 필사적으로 공격할 때, <strong>[투지]</strong> 판정을 합니다.</p>
+                            <ul>
+                                <li><strong>10+:</strong> 위기에서 벗어나며 <strong>표적</strong> 상태가 해제되고, 거인은 부상을 입거나 구축됩니다.</li>
+                                <li><strong>7-9:</strong> 위기에서 벗어나지만, 당신의 <strong>표적</strong>이 해제되거나 거인이 <strong>표적</strong>이 되는 것 중 하나만 선택해야 합니다.</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <h3>고급 기술</h3>
+                    <dl>
+                        <dt>생존 본능</dt><dd style="margin-bottom: 1.5em;">당신의 회피는 기술이 아닌 본능입니다. <strong>회피</strong> 기술을 사용할 때, [입체기동술] 대신 <strong>[투지]</strong>로 판정할 수 있습니다.</dd>
+                        <dt>최악의 경우</dt><dd style="margin-bottom: 1.5em;">위험한 작전 계획을 들을 때, 당신은 GM에게 "이 계획이 간과한 외부 위협은?", "가장 실패 확률이 높은 단계는?", "누가 가장 위험해지는가?" 중 하나를 물어볼 수 있습니다.</dd>
+                        <dt>벼랑 끝에서</dt><dd style="margin-bottom: 1.5em;"><strong>행운</strong>을 사용하여 판정 결과를 바꿨을 때, 그 처절함이 당신을 더 강하게 만듭니다. 다음 판정에 <strong>+1 보너스</strong>를 받습니다.</dd>
+                        <dt>불굴의 육체</dt><dd style="margin-bottom: 1.5em;">심각한 부상을 입었을 때, <strong>[투지]</strong> 판정을 합니다. 10+가 나오면 현재 위기가 끝날 때까지 부상과 그로 인한 페널티를 모두 무시할 수 있습니다.</dd>
+                        <dt>전우의 죽음</dt><dd style="margin-bottom: 1.5em;">동료 중 한 명이 사망했을 때, 당신은 즉시 주변의 모든 적을 <strong>표적</strong>으로 만들거나, 주변에 공격할 적이 없을 때까지 <strong>투지에 +1 지속 효과</strong>를 받는 것 중 하나를 선택합니다.</dd>
+                    </dl>
+                </div>
+            </article>
+        </div>
+        
+        <div data-class-template="inheritor">
+            <article class="c-article">
+                <header class="c-article-header">
+                    <div class="c-article-header__meta"><span class="c-article-header__category">CONCEPT</span><span><strong>거인의 힘을 품은, 인류의 마지막 희망이자 최대의 불안 요소</strong></span></div>
+                    <h1 class="c-article-header__main-title">계승자 (Inheritor)</h1>
+                </header>
+                <div class="c-article-body">
+                    <p><strong>※ 특별 병과:</strong> 이 병과는 게임 시작 시 선택할 수 없습니다. 시나리오를 통해 거인화 능력을 각성한 캐릭터만 선택할 수 있습니다. 인류의 적과 같은 힘을 사용하기에, 동료들에게조차 경계와 의심의 대상이 될 수 있습니다.</p>
+                    <p><strong>핵심 역량:</strong> 투지 (Rage)</p>
+                    <hr class="c-divider" style="margin: 2em 0;">
+                    <h3>시작 기술</h3>
+                    <dl>
+                        <dt>거인화</dt>
+                        <dd>
+                            <p>확고한 목표에 집중하며 자해할 때, <strong>[투지]</strong> 판정을 합니다.</p>
+                            <ul>
+                                <li><strong>10+:</strong> 당신은 거인이 되고, '권한' 3개를 얻습니다.</li>
+                                <li><strong>7-9:</strong> 거인이 되고 '권한' 2개를 얻지만, 폭주하여 지성을 잃거나, 몸의 일부만 형성되는 <strong>불완전 변신</strong>을 하거나, 주변의 모든 거인들의 주의를 끄는 등 통제 불능의 상황에 빠집니다.</li>
+                            </ul>
+                            <p>변신 상태에서는 대부분의 치명적인 공격은 당신을 죽이는 대신 인간 형태로 되돌려 놓습니다.<br><strong>'권한' 1개를 소모</strong>하여 다음 행동 중 하나를 할 수 있습니다.</p>
+                            <ul>
+                                <li>경이로운 수준의 신체적 위력(벽 파괴, 거대 바위 투척 등)을 발휘합니다.</li>
+                                <li><strong>표적</strong> 없이 <strong>결정타</strong>를 사용하며, 성공 시 거인을 즉시 구축합니다.</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <h3>고급 기술</h3>
+                    <dl>
+                        <dt>재생</dt><dd style="margin-bottom: 1.5em;">인간 상태로 몇 분간 휴식하면, 정신적/신체적 외상으로 인한 모든 지속 페널티를 제거합니다.</dd>
+                        <dt>거인의 힘</dt><dd style="margin-bottom: 1.5em;">거인 상태일 때, <strong>권한 1개</strong>를 소모하여 당신을 향한 공격의 피해를 완전히 무시할 수 있습니다.</dd>
+                        <dt>고열 증기</dt><dd style="margin-bottom: 1.5em;">거인에서 인간으로 돌아올 때, 주변에 거대한 고열의 증기 구름을 방출하여 적들을 밀어내고 탈출을 위한 시야를 확보할 수 있습니다.</dd>
+                        <dt>위협의 포효</dt><dd style="margin-bottom: 1.5em;">다가오는 거인을 향해 포효할 때, <strong>[투지]</strong> 판정을 합니다. 10+가 나오면 거인은 겁에 질려 도망가며 <strong>표적</strong> 상태가 됩니다. 7-9가 나오면 거인은 다른 모든 것을 무시하고 당신에게 달려들며, 서로가 서로를 <strong>표적</strong>으로 만듭니다.</dd>
+                        <dt>특이 형태</dt><dd style="margin-bottom: 1.5em;">당신의 거인은 특별한 능력을 가집니다. 갑옷화, 초대형, 초재생, 고속 기동 중 하나를 선택합니다. 거인화 시 이 능력을 얻으며, <strong>권한 1개</strong>를 소모하여 이 능력을 발동하고 자신에게 걸린 <strong>표적</strong>을 즉시 제거할 수 있습니다.</dd>
+                    </dl>
+                </div>
+            </article>
+        </div>
+        
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

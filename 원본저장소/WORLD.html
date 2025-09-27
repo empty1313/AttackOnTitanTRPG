@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>거인 세계 - 세계관</title>
+
+    <!-- 공식 사이트에서 사용하는 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Zen+Kaku+Gothic+Antique:wght@500;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. 배경 및 전체 레이아웃 --- */
+        body {
+            background-image: url(https://shingeki.tv/movie_final/img/common/bg_stone_dark.webp);
+            background-repeat: repeat; background-position: center center;
+            background-color: #000; color: #fff; font-family: 'Zen Kaku Gothic Antique', sans-serif;
+            margin: 0; padding-top: 7rem;
+        }
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url(https://shingeki.tv/movie_final/img/common/bg_wing.webp);
+            background-repeat: no-repeat; background-position: left top;
+            background-size: 55vw auto; z-index: -1; pointer-events: none;
+        }
+        .l-wrapper { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        /* --- 2. 상단 내비게이션 바 --- */
+        .c-header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 3rem; height: 6rem;
+            background-image: linear-gradient(to bottom, #000, rgba(0,0,0,0.8) 74%, transparent);
+            box-sizing: border-box;
+        }
+        .c-header__logo a, .c-mainmenu__link { font-family: "Cormorant", serif; text-decoration: none; color: #fff; font-weight: 700; transition: color 0.3s; }
+        .c-header__logo a { font-size: 2.2rem; }
+        .c-mainmenu { display: flex; list-style-type: none; margin: 0; padding: 0; gap: 2rem; }
+        .c-mainmenu__link { font-size: 1rem; }
+        .c-mainmenu__link:hover { color: #d50707; }
+        .c-mainmenu__link.active { border-bottom: 1px solid #d50707; }
+
+        /* --- 3. 메인 타이틀 --- */
+        .c-content-title {
+            position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+            line-height: 1; margin-top: 4rem; margin-bottom: 5rem;
+        }
+        .c-content-title__en { color: #fff; opacity: .15; font-size: 6rem; font-family: "Cormorant", serif; }
+        .c-content-title__ja { margin-top: -1.2em; color: #fff; font-size: 1.8rem; font-weight: 700; }
+
+        /* --- 4. WORLD 페이지 전용 스타일 (좌/우 배치) --- */
+        .intro-story__catch {
+            font-size: 2.5rem; line-height: 1.4; letter-spacing: 0.1em;
+            font-family: 'Nanum Myeongjo', serif; font-weight: 700;
+        }
+        .intro-story__text {
+            font-size: 1rem; line-height: 2; color: #ccc;
+        }
+        .intro-story__text p + p { margin-top: 1.5rem; }
+        .c-section-title {
+            text-align: center; font-size: 3.3rem;
+            color: #fff; opacity: .2; font-family: "Cormorant", serif; font-weight: 500;
+        }
+        .intro-story__intro-container, .intro-story__story-container {
+            box-sizing: border-box;
+        }
+        .intro-story__intro-content, .intro-story__story-content {
+             padding: 2rem;
+        }
+        
+        @media (min-width: 851px) {
+            .intro-story__intro-content { padding-left: 50%; }
+            .intro-story__story-content { padding-right: 50%; }
+        }
+
+        /* --- 5. 이미지 갤러리 --- */
+        .intro-story__gallery {
+            max-width: 1200px; /* 갤러리 너비를 조금 더 넓게 설정 */
+            margin: 5rem auto 0;
+            display: grid;
+            /* [수정] 원본처럼 가로 4열로 변경 */
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        .intro-story__gallery img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+        
+        /* --- 6. 하단(푸터) 스타일 --- */
+        .c-footer {
+            margin-top: 6rem; padding-top: 9rem; padding-bottom: 4rem; background-color: #000;
+            background-image: url(https://shingeki.tv/movie_final/img/common/footer_bg_bottom.webp);
+            background-size: max(100vw, 600px); background-position: center bottom; background-repeat: no-repeat;
+            mask-image: url(https://shingeki.tv/movie_final/img/common/footer_bg_top.webp), linear-gradient(to bottom, transparent 15%, #000 15%);
+            mask-size: max(100vw, 600px) auto, 100% 100%;
+            mask-position: top center, center; mask-repeat: no-repeat;
+        }
+        .c-footer__copyright { font-size: 0.8rem; text-align: center; color: #ccc; }
+
+        /* --- 모바일 화면 대응 --- */
+        @media (max-width: 850px) {
+            body { padding-top: 5rem; }
+            body::before { background-size: 100vw auto; }
+            .l-wrapper { padding: 1rem; }
+            .c-header { padding: 1rem; height: auto; }
+            .c-header__logo a { font-size: 1.2rem; }
+            .c-mainmenu { display: none; }
+            .c-content-title__en { font-size: 3rem; }
+            .c-content-title__ja { font-size: 1.2rem; }
+            .intro-story__catch { font-size: 1.8rem; }
+            /* [수정] 모바일에서는 2열로 변경 */
+            .intro-story__gallery { grid-template-columns: repeat(2, 1fr); }
+            /* [추가] 모바일에서 3, 4번째 이미지 숨기기 */
+            .intro-story__gallery img:nth-child(n+3) { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="c-header">
+        <h1 class="c-header__logo"><a href="#">거인 세계 TRPG</a></h1>
+        <nav>
+            <ul class="c-mainmenu">
+                <li><a href="#" class="c-mainmenu__link">HOME</a></li>
+                <li><a href="#" class="c-mainmenu__link active">WORLD</a></li>
+                <li><a href="#" class="c-mainmenu__link">SYSTEM</a></li>
+                <li><a href="#" class="c-mainmenu__link">CLASSES</a></li>
+                <li><a href="#" class="c-mainmenu__link">SPECIAL</a></li>
+                <li><a href="#" class="c-mainmenu__link">NEWS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="l-wrapper">
+        <h1 class="c-content-title">
+            <span class="c-content-title__en">WORLD</span>
+            <span class="c-content-title__ja">세계관</span>
+        </h1>
+
+        <!-- 프롤로그 섹션 (오른쪽 정렬) -->
+        <section class="intro-story__intro-container">
+            <div class="intro-story__intro-content">
+                <div class="intro-story__catch">
+                    오래 전, 이 세계는<br>인간의 것이었다.
+                </div>
+                <div class="intro-story__text">
+                    <p>거인의 등장은 갑작스럽고 잔혹했습니다. 사실상 파괴가 불가능한 거인들은 오직 인간을 잡아먹는 것에만 혈안이 되어 인류를 멸종 직전까지 내몰았습니다.</p>
+                    <p>살아남은 인류는 세 겹의 거대한 벽으로 둘러싸인 단 하나의 나라에서 살아갑니다. 벽 안은 안전하지만, 단 한 번의 균열만으로도 모든 것은 혼돈에 빠져들 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 시놉시스 섹션 (왼쪽 정렬) -->
+        <section class="intro-story__story-container" style="margin-top: 4rem;">
+            <div class="intro-story__story-content">
+                <h2 class="c-section-title">SYNOPSIS</h2>
+                <div class="intro-story__text">
+                    <p>때는 거인이 성벽을 침공하기 전, 인류가 100년간의 거짓된 평화를 누리던 시대. 당신들은 이제 막 훈련병단을 졸업하고 희망에 부푼 신병들입니다.</p>
+                    <p>조사병단에 배속되어 인류의 영광을 되찾기 위한 첫 벽외조사에 참여하게 된 당신들. 하지만 벽 너머의 위협은 상상 이상이었고, 벽 안에서 암약하는 거대한 진실의 편린과 마주하게 됩니다. 위협은 과연 거인뿐일까요?</p>
+                    <p>당신의 선택과 희생이 인류를, 그리고 동료들을 어떤 미래로 이끌게 될지, 아직은 아무도 모릅니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 이미지 갤러리 -->
+        <div class="intro-story__gallery">
+            <img src="https://shingeki.tv/movie_final/introduction/img/story_dummy_01.jpg" alt="거대한 벽의 모습">
+            <img src="https://shingeki.tv/movie_final/introduction/img/story_dummy_02.jpg" alt="입체기동장치로 비행하는 병사들">
+            <img src="https://shingeki.tv/movie_final/introduction/img/story_dummy_03.jpg" alt="거인과의 처절한 전투 장면">
+            <img src="https://shingeki.tv/movie_final/introduction/img/story_dummy_04.jpg" alt="벽 안 도시의 평화로운 풍경">
+        </div>
+
+    </main>
+
+    <footer class="c-footer">
+        <p class="c-footer__copyright">Ⓒ 거인 세계 TRPG (Your Name or Circle Name)</p>
+    </footer>
+
+</body>
+</html>

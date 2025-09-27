@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>거인 세계 TRPG</title>
+
+    <!-- 공식 사이트에서 사용하는 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Zen+Kaku+Gothic+Antique:wght@500;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. 배경 및 전체 레이아웃 --- */
+        body {
+            background-image: url(https://shingeki.tv/movie_final/img/common/bg_stone_dark.webp);
+            background-color: #000; color: #fff; font-family: 'Zen Kaku Gothic Antique', sans-serif;
+            margin: 0;
+        }
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url(https://shingeki.tv/movie_final/img/common/bg_wing.webp);
+            background-repeat: no-repeat; background-position: left top;
+            background-size: 55vw auto; z-index: -1; pointer-events: none;
+        }
+        .l-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* --- 2. 상단 내비게이션 바 --- */
+        .c-header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 3rem; height: 6rem;
+            background-image: linear-gradient(to bottom, #000, rgba(0,0,0,0.8) 74%, transparent);
+            box-sizing: border-box;
+        }
+        .c-header__logo a, .c-mainmenu__link { font-family: "Cormorant", serif; text-decoration: none; color: #fff; font-weight: 700; transition: color 0.3s; }
+        .c-header__logo a { font-size: 2.2rem; }
+        .c-mainmenu { display: flex; list-style-type: none; margin: 0; padding: 0; gap: 2rem; }
+        .c-mainmenu__link { font-size: 1rem; }
+        .c-mainmenu__link:hover { color: #d50707; }
+        .c-mainmenu__link.active { border-bottom: 1px solid #d50707; }
+
+        /* --- 3. 홈 페이지 메인 레이아웃 (좌/우 분할) --- */
+        .home-layout { display: grid; }
+        .home-layout__side { position: relative; }
+        
+        @media (min-width: 851px) {
+            .home-layout { grid-template-columns: minmax(350px, 30%) 1fr; }
+            .home-layout__side { position: sticky; top: 0; height: 100vh; }
+            .home-title-container { display: none; }
+        }
+        
+        .home-title {
+            display: flex; flex-direction: column; justify-content: center;
+            height: 100%; text-align: center; padding: 2rem; box-sizing: border-box;
+        }
+        .home-title__logo { font-family: 'Nanum Myeongjo', serif; font-size: 2.8rem; font-weight: 700; letter-spacing: 0.1em; }
+        .home-title__catchphrase { font-size: 1.1rem; color: #ccc; margin-top: 1.5rem; line-height: 1.6; }
+        .home-title__cta {
+            display: block; width: fit-content; margin: 2.5rem auto 0;
+            padding: 1em 2.5em; background: #d50707; color: #fff;
+            text-decoration: none; font-weight: 700; font-size: 1.1rem;
+            transition: background 0.3s;
+        }
+        .home-title__cta:hover { background: #a00505; }
+        
+        /* --- 4. 메인 비주얼 및 콘텐츠 --- */
+        .home-visual { position: relative; }
+        .home-visual img { width: 100%; height: auto; }
+        .home-news { padding: 4rem 0; }
+        .c-content-title { margin-bottom: 3rem; text-align: center; }
+        .c-content-title__en { font-size: 3rem; opacity: 1; color: #222; font-family: "Cormorant", serif; }
+        .c-content-title__ja { font-size: 1.2rem; margin-top: -0.8em; color: #999; }
+        
+        .news-list { border-top: 1px solid rgba(255, 255, 255, 0.2); }
+        .news-item {
+            display: grid; grid-template-columns: 8rem 1fr; gap: 1.5rem;
+            align-items: center; padding: 1.5rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none; color: #fff; transition: color 0.3s;
+        }
+        .news-item:hover { color: #d50707; }
+        .news-item__date { text-align: center; color: #999; font-size: 1.2rem; font-family: "Cormorant", serif; }
+        .news-item__year { font-size: 0.8em; display: block; }
+        .news-item__title { line-height: 1.8; font-size: 0.95rem; }
+        
+        .c-btn {
+            position: relative; display: block; width: fit-content;
+            padding: .8em 2em; text-decoration: none; transition: .2s; font-weight: 700;
+        }
+        .c-btn--en { font-family: "Cormorant", serif; }
+        .c-btn--bd-white { color: #fff; border: 1px solid #fff; }
+        .c-btn--bd-white:hover { color: #d50707; border-color: #d50707; }
+        .u-mg_t_l4 { margin-top: 2.5rem; }
+        .u-mg_auto { margin-left: auto; margin-right: auto; }
+
+        /* [추가] 트레일러 섹션 스타일 */
+        .home-trailer { padding: 4rem 0; }
+        .home-trailer img { width: 100%; height: auto; transition: opacity 0.3s; }
+        .home-trailer a:hover img { opacity: 0.7; }
+
+        /* --- 5. 하단(푸터) 스타일 --- */
+        .c-footer {
+            margin-top: 6rem; padding-top: 9rem; padding-bottom: 4rem; background-color: #000;
+            background-image: url(https://shingeki.tv/movie_final/img/common/footer_bg_bottom.webp);
+            background-size: max(100vw, 600px); background-position: center bottom; background-repeat: no-repeat;
+            mask-image: url(https://shingeki.tv/movie_final/img/common/footer_bg_top.webp), linear-gradient(to bottom, transparent 15%, #000 15%);
+            mask-size: max(100vw, 600px) auto, 100% 100%;
+            mask-position: top center, center; mask-repeat: no-repeat;
+        }
+        .c-footer__copyright { font-size: 0.8rem; text-align: center; color: #ccc; }
+
+        /* --- 6. 애니메이션 --- */
+        .e-iv { opacity: 0; transition: opacity 1s, transform 1s; transform: translateY(20px); }
+        .e-iv.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* --- 모바일 화면 대응 --- */
+        .home-title-container { display: none; }
+        @media (max-width: 850px) {
+            body { padding-top: 5rem; }
+            body::before { background-size: 100vw auto; }
+            .l-wrapper { padding: 0 1rem; }
+            .c-header { padding: 1rem; height: auto; }
+            .c-header__logo a { font-size: 1.2rem; }
+            .c-mainmenu { display: none; }
+            .home-layout__side { display: none; }
+            .home-title-container { display: block; padding: 6rem 0 2rem; }
+            .home-title__logo { font-size: 8vw; }
+            .home-title__catchphrase { font-size: 1rem; }
+            .news-item { grid-template-columns: 1fr; gap: 0.5rem; }
+            .news-item__date { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+    <header class="c-header">
+        <h1 class="c-header__logo"><a href="#">거인 세계 TRPG</a></h1>
+        <nav>
+            <ul class="c-mainmenu">
+                <li><a href="#" class="c-mainmenu__link active">HOME</a></li>
+                <li><a href="#" class="c-mainmenu__link">WORLD</a></li>
+                <li><a href="#" class="c-mainmenu__link">SYSTEM</a></li>
+                <li><a href="#" class="c-mainmenu__link">CLASSES</a></li>
+                <li><a href="#" class="c-mainmenu__link">SPECIAL</a></li>
+                <li><a href="#" class="c-mainmenu__link">NEWS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="l-wrapper">
+        <div class="home-layout">
+            <!-- PC용 사이드바 -->
+            <aside class="home-layout__side">
+                <div class="home-title">
+                    <h1 class="home-title__logo e-iv">거인 세계</h1>
+                    <p class="home-title__catchphrase e-iv" style="transition-delay: 0.2s;">오래 전, 이 세계는 인간의 것이었다.<br>그러나 이제, 이 세계는 거인의 것이다.</p>
+                    <a href="#" class="home-title__cta e-iv" style="transition-delay: 0.4s;">룰북 다운로드</a>
+                </div>
+            </aside>
+
+            <!-- 메인 콘텐츠 -->
+            <div class="home-layout__main">
+                <!-- 모바일용 제목/로고 -->
+                <div class="home-title-container">
+                    <div class="home-title">
+                        <h1 class="home-title__logo e-iv">거인 세계</h1>
+                        <p class="home-title__catchphrase e-iv" style="transition-delay: 0.2s;">오래 전, 이 세계는 인간의 것이었다.<br>그러나 이제, 이 세계는 거인의 것이다.</p>
+                        <a href="#" class="home-title__cta e-iv" style="transition-delay: 0.4s;">룰북 다운로드</a>
+                    </div>
+                </div>
+
+                <section class="home-visual e-iv">
+                    <img src="https://images.unsplash.com/photo-1590704907998-59245a49c4e6?q=80&w=2574&auto=format&fit=crop" alt="거대한 안개 낀 산맥의 풍경">
+                </section>
+                
+                <section class="home-news">
+                    <h2 class="c-content-title e-iv">
+                        <span class="c-content-title__en">NEWS</span>
+                        <span class="c-content-title__ja">최신 정보</span>
+                    </h2>
+                    <div class="news-list e-iv">
+                        <a href="#" class="news-item"><span class="news-item__date"><span class="news-item__year">2025</span>09.18</span><span class="news-item__title">규칙 업데이트: '투지' 판정 방식 변경 안내</span></a>
+                        <a href="#" class="news-item"><span class="news-item__date"><span class="news-item__year">2025</span>09.09</span><span class="news-item__title">새로운 시나리오 '성벽 안의 스파이'가 공개되었습니다.</span></a>
+                        <a href="#" class="news-item"><span class="news-item__date"><span class="news-item__year">2025</span>08.29</span><span class="news-item__title">홈페이지가 정식으로 오픈되었습니다.</span></a>
+                    </div>
+                    <a href="#" class="c-btn c-btn--en c-btn--bd-white u-mg_t_l4 u-mg_auto e-iv">MORE</a>
+                </section>
+
+                <!-- [추가] 트레일러 섹션 (스크롤 확인용) -->
+                <section class="home-trailer e-iv">
+                    <h2 class="c-content-title e-iv">
+                        <span class="c-content-title__en">TRAILER</span>
+                        <span class="c-content-title__ja">소개 영상</span>
+                    </h2>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                        <img src="https://picsum.photos/seed/trailer/1200/675" alt="TRPG 소개 영상 바로가기">
+                    </a>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="c-footer">
+        <p class="c-footer__copyright">Ⓒ 거인 세계 TRPG (Your Name or Circle Name)</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.e-iv').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

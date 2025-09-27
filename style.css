@@ -1,0 +1,330 @@
+/* ================================================================ */
+/* style.css (모든 페이지 공용 스타일) */
+/* ================================================================ */
+
+/* --- 1. 기본 및 공통 레이아웃 --- */
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background-image: url(images/bg_stone_dark.webp);
+    background-repeat: repeat;
+    background-position: center center;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Zen Kaku Gothic Antique', sans-serif;
+    margin: 0;
+    padding-top: 6rem;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(images/bg_wing.webp);
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 55vw auto;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* [핵심] 기본 l-wrapper는 중앙 정렬, 너비 제한 */
+.l-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* --- 2. 상단 헤더 (공통) --- */
+.c-header {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 3rem; height: 6rem;
+    background-image: linear-gradient(to bottom, #000, rgba(0,0,0,0.8) 74%, transparent);
+    box-sizing: border-box;
+}
+.c-header__logo img {
+    height: 2.8rem; /* 헤더 높이에 맞게 로고 크기 조절 */
+    width: auto;
+    vertical-align: middle; /* 세로 중앙 정렬 */
+}
+.c-header__logo a, .c-mainmenu__link { font-family: "Cormorant", serif; text-decoration: none; color: #fff; font-weight: 700; transition: color 0.3s; }
+.c-mainmenu { display: flex; list-style-type: none; margin: 0; padding: 0; gap: 2rem; }
+.c-mainmenu__link { font-size: 1rem; }
+.c-mainmenu__link:hover { color: #d50707; }
+.c-mainmenu__link.active { border-bottom: 1px solid #d50707; }
+
+/* [추가] 햄버거 메뉴 버튼 */
+.c-hamburger-btn {
+    display: none; /* PC에서는 숨김 */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 18px;
+    position: relative;
+    z-index: 1010; /* mobile-nav보다 위에 오도록 */
+}
+.c-hamburger-btn span {
+    display: block;
+    background-color: #fff;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    transition: all 0.3s;
+}
+.c-hamburger-btn span:nth-child(1) { top: 0; }
+.c-hamburger-btn span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.c-hamburger-btn span:nth-child(3) { bottom: 0; }
+
+/* [추가] 모바일 메뉴 패널 스타일 */
+.c-mobile-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 1005;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+    padding: 6rem 2rem;
+    box-sizing: border-box;
+}
+.c-mobile-nav.is-open {
+    transform: translateX(0);
+}
+.c-mobile-nav__close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+.c-mobile-nav__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.c-mobile-nav__menu li {
+    margin-bottom: 1.5rem;
+}
+.c-mobile-nav__menu .c-mainmenu__link { /* 기존 클래스 재활용 */
+    font-size: 1.2rem;
+}
+
+
+/* --- 3. 하단 푸터 (공통) --- */
+.c-footer {
+    margin-top: 9rem;
+    padding-top: 12rem;
+    padding-bottom: 5rem;
+    background-color: #000;
+    background-image: url(images/footer_bg_bottom.webp);
+    background-size: max(100vw, 600px);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    mask-image: url(images/footer_bg_top.webp);
+    mask-size: max(100vw, 600px) auto, 100% 100%;
+    mask-position: top center, center;
+    mask-repeat: no-repeat;
+}
+.c-footer__copyright {
+    font-size: 0.75rem;
+    text-align: center;
+    color: #aaa;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+/* --- 4. 페이지별 레이아웃 오버라이드 --- */
+/* [핵심] home-page일 때만 l-wrapper의 너비 제한을 해제 */
+.home-page .l-wrapper {
+    max-width: none;
+    padding: 0;
+}
+/* [핵심] home-page일 때만 날개 배경 숨기기 */
+.home-page::before {
+    display: none;
+}
+/* [핵심] home-page일 때만 로고 숨기기 */
+.home-page .c-header__logo { display: none; }
+.home-page .c-header {
+    justify-content: right; /* HOME 페이지에서만 내부 요소를 중앙 정렬 */
+}
+/* SYSTEM 페이지 전용 좁은 레이아웃 */
+.system-page .l-wrapper {
+    max-width: 960px;
+}
+
+
+/* --- 5. HOME 페이지 전용 스타일 --- */
+.home-layout { display: grid; }
+.home-layout__side { position: relative; display: flex; align-items: center; padding: 0 40px; box-sizing: border-box; }
+.home-title { width: 100%; text-align: center; }
+.home-title__logo img {
+    max-width: 250px; /* PC 화면에서 로고의 최대 너비 제한 */
+    width: 70%;       /* 화면 크기에 맞춰 너비 조절 */
+    height: auto;     /* 이미지 비율 유지 */
+}
+.home-title__catchphrase { font-size: 1.1rem; color: #ccc; margin-top: 1.5rem; line-height: 1.6; }
+.home-title__cta { display: block; width: fit-content; margin: 2.5rem auto 0; padding: 1em 2.5em; background: #d50707; color: #fff; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: background 0.3s; }
+.home-title__cta:hover { background: #a00505; }
+.home-layout__main { position: relative; }
+.home-visual { line-height: 0; }
+.home-visual img { width: 100%; height: auto; display: block; }
+.home-news, .home-trailer { max-width: 960px; margin: 0 auto; padding: 4rem 2rem; }
+.home-news .c-content-title__en { font-size: 3rem; opacity: 1; color: #222; }
+.home-news .c-content-title__ja { font-size: 1.2rem; margin-top: -0.8em; color: #999; }
+.home-news .news-list { border-top: 1px solid rgba(255, 255, 255, 0.2); }
+.home-news .news-item { display: grid; grid-template-columns: 8rem 1fr; gap: 1.5rem; align-items: center; padding: 1.5rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); text-decoration: none; color: #fff; transition: color 0.3s; }
+.home-news .news-item:hover { color: #d50707; }
+.home-news .news-item__date { text-align: center; color: #999; font-size: 1.2rem; font-family: "Cormorant", serif; }
+.home-news .news-item__year { font-size: 0.8em; display: block; }
+.home-news .news-item__title { line-height: 1.8; font-size: 0.95rem; }
+.home-trailer .c-content-title__en { font-size: 3rem; opacity: 1; color: #222; }
+.home-trailer .c-content-title__ja { font-size: 1.2rem; margin-top: -0.8em; color: #999; }
+.home-trailer img { width: 100%; height: auto; transition: opacity 0.3s; }
+.home-trailer a:hover img { opacity: 0.7; }
+
+/* --- 6. 서브 페이지(WORLD, SYSTEM, CLASSES) 공통 스타일 --- */
+.c-content-title { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; line-height: 1; margin-top: 4rem; margin-bottom: 5rem; }
+.c-content-title__en { color: #fff; opacity: .15; font-size: 6rem; font-family: "Cormorant", serif; }
+.c-content-title__ja { margin-top: -1.2em; color: #fff; font-size: 1.8rem; font-weight: 700; }
+.hidden { display: none !important; }
+.visible { display: block; animation: fadeIn 0.5s forwards; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.e-iv { opacity: 0; transition: opacity 1s, transform 1s; transform: translateY(20px); }
+.e-iv.is-visible { opacity: 1; transform: translateY(0); }
+
+/* --- 7. WORLD 페이지 스타일 --- */
+.intro-story__catch { font-size: 1.9rem; line-height: 1.4; letter-spacing: 0.1em; font-family: 'Nanum Myeongjo', serif; font-weight: 700; }
+.intro-story__text { font-size: 1rem; line-height: 2; color: #ccc; }
+.intro-story__text p + p { margin-top: 1.5rem; }
+.c-section-title { text-align: center; font-size: 3.3rem; color: #fff; opacity: .2; font-family: "Cormorant", serif; font-weight: 500; }
+.intro-story__intro-container, .intro-story__story-container { box-sizing: border-box; }
+.intro-story__intro-content, .intro-story__story-content { padding: 2rem; }
+.intro-story__gallery { max-width: 1200px; margin: 5rem auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.intro-story__gallery img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+
+/* --- 8. SYSTEM 페이지 스타일 --- */
+.c-tabmenu-wrapper { margin-bottom: 4rem; }
+.c-tabmenu { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; padding-left: 0; margin: 0; list-style-type: none; }
+.c-tabmenu__link { display: block; font-family: "Cormorant", serif; font-weight: 500; font-size: 1.3rem; color: #fff; text-decoration: none; padding: 0 0.5em 0.3em; background-repeat: no-repeat; background-position: center bottom; background-size: 100% 1px; transition: color 0.3s; cursor: pointer; }
+.c-tabmenu__link:hover { color: #d50707; }
+.c-tabmenu__link.active { color: #fff; background-image: linear-gradient(#d50707, #d50707); }
+#system-content-area { min-height: 60vh; }
+.system-content { display: none; animation: fadeInUp 0.5s forwards; }
+.system-content.visible { display: block; }
+.system-page .news-list { border-top: 1px solid rgba(255, 255, 255, 0.2); }
+.system-page .news-item { display: grid; grid-template-columns: 10rem 1fr; gap: 1.5rem; align-items: center; padding: 1.5rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); color: #fff; }
+.system-page .news-item__category { text-align: center; line-height: 1.3; color: #ccc; font-size: 1.2rem; font-family: "Cormorant", serif; font-weight: 700; }
+.system-page .news-item__title { line-height: 1.8; font-size: 0.95rem; color: #ccc; }
+.system-page .news-item__title strong { color: #fff; }
+.system-page .news-item__title ul { padding-left: 1rem; margin-top: 0.5rem; list-style: none; }
+.system-page .news-item__title li { position: relative; padding-left: 1rem; }
+.system-page .news-item__title li::before { content: '•'; color: #d50707; position: absolute; left: 0; }
+
+/* --- 9. CLASSES 페이지 스타일 --- */
+.class-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2.8rem; }
+.class-list__item { display: block; text-decoration: none; color: #fff; transition: opacity 0.3s; }
+.class-list__item:hover { opacity: 0.3; }
+.class-list__item img { width: 100%; height: auto; aspect-ratio: 1/1; object-fit: cover; }
+.class-list__caption { display: flex; flex-direction: column; margin-top: 1rem; line-height: 1; text-align: center; }
+.class-list__name-ja { font-size: 1.2rem; letter-spacing: 0.1em; font-family: 'Nanum Myeongjo', serif; font-weight: 700; }
+.class-list__name-en { margin-top: 0.4rem; font-size: 0.9rem; color: #999; font-family: "Cormorant", serif; }
+.c-article-header { padding-bottom: 2rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+.c-article-header__meta { display: flex; gap: 1em; color: #ccc; font-family: "Cormorant", serif; }
+.c-article-header__category { color: #d50707; font-weight: bold; }
+.c-article-header__main-title { font-size: 2.2rem; margin-top: 1rem; font-family: 'Nanum Myeongjo', serif; }
+.c-article-body h3 { font-size: 1.5rem; font-weight: 700; color: #eee; margin-top: 2.5rem; margin-bottom: 1.5rem; padding-left: 1rem; border-left: 3px solid #d50707; }
+.c-article-body dl { margin-bottom: 1.5rem; }
+.c-article-body dt { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+.c-article-body dd { font-size: 0.95rem; line-height: 1.8; color: #ccc; margin-left: 1rem; }
+.c-btn { position: relative; display: block; width: fit-content; padding: .8em 2em; text-decoration: none; transition: .2s; font-weight: 700; }
+.c-btn--en { font-family: "Cormorant", serif; }
+.c-btn--text { color: #fff; }
+.c-btn--text:hover { color: #d50707; }
+.c-btn--prev { padding-left: 3em; }
+.c-btn--prev::before { font-family: "arrows"; content: "\e925"; font-size: 0.8em; position: absolute; left: 1.5em; top: 50%; transform: translateY(-50%); transition: .3s; }
+.c-btn--prev:hover::before { transform: translateY(-50%) translateX(-5px); }
+/* [수정] Back 버튼을 감싸는 nav를 중앙 정렬 */
+#class-detail-view > nav {
+    display: flex;
+    justify-content: center;
+}
+#back-to-list-btn {
+    font-size: 1.4rem;
+}
+
+/* --- 10. 반응형 웹 스타일 --- */
+@media (min-width: 1025px) {
+    /* PC HOME */
+    .home-layout { grid-template-columns: 3fr 7fr; }
+    .home-layout__side { position: sticky; top: 0; height: 100vh; }
+    /* PC WORLD */
+    .intro-story__intro-content { padding-left: 50%; }
+    .intro-story__story-content { padding-right: 50%; }
+}
+
+@media (max-width: 1024px) {
+    body { padding-top: 5rem; }
+    body::before { background-size: 100vw auto; }
+    .l-wrapper { padding: 1rem; }
+    
+    /* [수정] 헤더에 position: relative 추가하여 햄버거 버튼 기준점 설정 */
+    .c-header { padding: 1rem; height: 5rem; position: relative; }
+    .c-header__logo a { font-size: 1.2rem; }
+    .c-header__logo img {
+        height: 2.4rem; /* 모바일 헤더에 맞게 로고 크기 조절 */
+    }
+
+    /* [수정] PC 메뉴를 감싸는 nav 자체를 숨김 */
+    .c-pc-nav { display: none; }
+
+    /* [수정] 햄버거 버튼을 오른쪽 상단에 절대 위치로 고정 */
+    .c-hamburger-btn {
+        display: block;
+        position: absolute;
+        right: 1rem; /* 오른쪽 여백 */
+        top: 50%;   /* 상단에서 50% 위치 */
+        transform: translateY(-50%); /* 세로 중앙 정렬 */
+    }
+
+    .c-content-title__en { font-size: 3rem; }
+    .c-content-title__ja { font-size: 1.2rem; }
+    
+    /* Mobile HOME */
+    .home-layout { display: block; }
+    .home-title { height: auto; padding: 6rem 0 2rem; }
+    .home-title__logo { font-size: 8vw; }
+    .home-title__catchphrase { font-size: 1rem; }
+    .home-news .news-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .home-news .news-item__date { text-align: left; }
+
+    /* Mobile WORLD */
+    .intro-story__catch { font-size: 1.8rem; }
+    .intro-story__gallery { grid-template-columns: repeat(2, 1fr); }
+    .intro-story__gallery img:nth-child(n+3) { display: none; }
+    
+    /* Mobile SYSTEM */
+    .c-tabmenu { gap: 0.5rem 1rem; }
+    .c-tabmenu__link { font-size: 1rem; }
+    .system-page .news-item { grid-template-columns: 1fr; gap: 1rem; }
+    .system-page .news-item__category { text-align: left; font-size: 1.3rem; margin-bottom: 0.5rem; }
+
+    /* Mobile CLASSES */
+    .class-list { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; }
+}

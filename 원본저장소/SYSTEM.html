@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>거인 세계 - 시스템</title>
+
+    <!-- 공식 사이트에서 사용하는 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Zen+Kaku+Gothic+Antique:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. 배경 및 전체 레이아웃 --- */
+        body {
+            background-image: url(https://shingeki.tv/movie_final/img/common/bg_stone_dark.webp);
+            background-repeat: repeat; background-position: center center;
+            background-color: #000; color: #fff; font-family: 'Zen Kaku Gothic Antique', sans-serif;
+            margin: 0; padding-top: 7rem; /* [수정] 커진 헤더만큼 여백 확보 */
+        }
+
+        body::before { /* [수정] 배경 흔들림 문제 해결 */
+            content: ''; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url(https://shingeki.tv/movie_final/img/common/bg_wing.webp);
+            background-repeat: no-repeat; background-position: left top;
+            background-size: 55vw auto; z-index: -1; pointer-events: none;
+        }
+        
+        .l-wrapper { max-width: 960px; margin: 0 auto; padding: 2rem; }
+
+        /* --- 2. 상단 내비게이션 바 --- */
+        .c-header { /* [수정] 크기 및 패딩 조정 */
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 3rem; height: 6rem;
+            background-image: linear-gradient(to bottom, #000, rgba(0,0,0,0.8) 74%, transparent);
+            box-sizing: border-box;
+        }
+        .c-header__logo a { font-size: 2.2rem; } /* [수정] 로고 크기 증가 */
+        .c-mainmenu { gap: 2rem; } /* [수정] 메뉴 간격 증가 */
+        .c-mainmenu__link { font-size: 1rem; } /* [수정] 메뉴 글자 크기 증가 */
+        .c-header__logo a, .c-mainmenu__link { font-family: "Cormorant", serif; text-decoration: none; color: #fff; font-weight: 700; transition: color 0.3s; }
+        .c-mainmenu { display: flex; list-style-type: none; margin: 0; padding: 0; }
+        .c-mainmenu__link:hover { color: #d50707; }
+        .c-mainmenu__link.active { border-bottom: 1px solid #d50707; }
+
+        /* --- 3. 메인 타이틀 --- */
+        .c-content-title {
+            position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+            line-height: 1; margin-top: 4rem; margin-bottom: 3rem;
+        }
+        .c-content-title__en { color: #fff; opacity: .15; font-size: 6rem; font-family: "Cormorant", serif; }
+        .c-content-title__ja { margin-top: -1.2em; color: #fff; font-size: 1.8rem; font-weight: 700; }
+        
+        /* --- 4. 메인 탭 메뉴 --- */
+        .c-tabmenu-wrapper { margin-bottom: 4rem; }
+        .c-tabmenu { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; padding-left: 0; margin: 0; list-style-type: none; }
+        .c-tabmenu__link {
+            display: block; font-family: "Cormorant", serif; font-weight: 500; font-size: 1.3rem; color: #fff;
+            text-decoration: none; padding: 0 0.5em 0.3em; background-repeat: no-repeat;
+            background-position: center bottom; background-size: 100% 1px; transition: color 0.3s; cursor: pointer;
+        }
+        .c-tabmenu__link:hover { color: #d50707; }
+        .c-tabmenu__link.active { color: #fff; background-image: linear-gradient(#d50707, #d50707); }
+        
+        /* --- 5. 탭 콘텐츠 --- */
+        #system-content-area { min-height: 60vh; } /* [수정] 배경 흔들림 방지를 위한 최소 높이 설정 */
+        .system-content { display: none; opacity: 0; animation: fadeIn 0.5s forwards; }
+        .system-content.visible { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* --- 6. 뉴스 리스트 형식 스타일 --- */
+        .news-list { border-top: 1px solid rgba(255, 255, 255, 0.2); }
+        .news-item {
+            display: grid; grid-template-columns: 10rem 1fr;
+            gap: 1.5rem; align-items: center; padding: 1.5rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        .news-item__category {
+            text-align: center; line-height: 1.3; color: #ccc;
+            font-size: 1.2rem; font-family: "Cormorant", serif; font-weight: 700;
+        }
+        .news-item__title { line-height: 1.8; font-size: 0.95rem; color: #ccc; }
+        .news-item__title strong { color: #fff; }
+        .news-item__title ul { padding-left: 1rem; margin-top: 0.5rem; list-style: none; }
+        .news-item__title li { position: relative; padding-left: 1rem; }
+        .news-item__title li::before { content: '•'; color: #d50707; position: absolute; left: 0; }
+
+        /* --- 7. 하단(푸터) 스타일 --- */
+        .c-footer {
+            margin-top: 6rem; padding-top: 9rem; padding-bottom: 4rem;
+            background-color: #000;
+            background-image: url(https://shingeki.tv/movie_final/img/common/footer_bg_bottom.webp);
+            background-size: max(100vw, 600px); background-position: center bottom; background-repeat: no-repeat;
+            mask-image: url(https://shingeki.tv/movie_final/img/common/footer_bg_top.webp), linear-gradient(to bottom, transparent 15%, #000 15%);
+            mask-size: max(100vw, 600px) auto, 100% 100%;
+            mask-position: top center, center; mask-repeat: no-repeat;
+        }
+        .c-footer__copyright { font-size: 0.8rem; text-align: center; color: #ccc; }
+
+        /* --- 모바일 화면 대응 --- */
+        @media (max-width: 768px) {
+            body { padding-top: 5rem; }
+            body::before { background-size: 100vw auto; }
+            .l-wrapper { padding: 1rem; }
+            .c-header { padding: 1rem; height: auto; }
+            .c-header__logo a { font-size: 1.2rem; }
+            .c-mainmenu { display: none; }
+            .c-content-title__en { font-size: 3rem; }
+            .c-content-title__ja { font-size: 1.2rem; }
+            .c-tabmenu { gap: 0.5rem 1rem; }
+            .c-tabmenu__link { font-size: 1rem; }
+            .news-item { grid-template-columns: 1fr; gap: 1rem; }
+            .news-item__category { text-align: left; font-size: 1.3rem; margin-bottom: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="c-header">
+        <h1 class="c-header__logo"><a href="#">거인 세계 TRPG</a></h1>
+        <nav>
+            <ul class="c-mainmenu">
+                <li><a href="#" class="c-mainmenu__link">HOME</a></li>
+                <li><a href="#" class="c-mainmenu__link">WORLD</a></li>
+                <li><a href="#" class="c-mainmenu__link active">SYSTEM</a></li>
+                <li><a href="#" class="c-mainmenu__link">CLASSES</a></li>
+                <li><a href="#" class="c-mainmenu__link">SPECIAL</a></li>
+                <li><a href="#" class="c-mainmenu__link">NEWS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="l-wrapper">
+        <h1 class="c-content-title">
+            <span class="c-content-title__en">SYSTEM</span>
+            <span class="c-content-title__ja">시스템</span>
+        </h1>
+
+        <div class="c-tabmenu-wrapper">
+            <ul class="c-tabmenu" id="system-tabs">
+                <li><a class="c-tabmenu__link" data-tab="stats">핵심 역량</a></li>
+                <li><a class="c-tabmenu__link" data-tab="creation">캐릭터 생성</a></li>
+                <li><a class="c-tabmenu__link" data-tab="rules">장비 및 규칙</a></li>
+                <li><a class="c-tabmenu__link" data-tab="combat">거인 및 전투</a></li>
+                <li><a class="c-tabmenu__link" data-tab="moves">기본 기술</a></li>
+            </ul>
+        </div>
+
+        <div id="system-content-area">
+
+            <!-- 1. 핵심 역량 (STATS) 콘텐츠 -->
+            <div class="system-content" data-tab-content="stats">
+                <section class="news-list">
+                    <div class="news-item"><span class="news-item__category">입체기동술<br>(Agility)</span><span class="news-item__title">입체기동장치를 신체 일부처럼 다루는 기술. 가스 소모 최적화, 거인 공격 예측, 효율적인 경로 탐색 등 모든 공중 기동 능력을 포함합니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">토벌기술<br>(Execution)</span><span class="news-item__title">거인의 약점인 '목덜미'를 정확하고 신속하게 베어내는 살상 기술. 냉철한 판단력과 급소를 노리는 정밀함을 포함합니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">상황판단<br>(Awareness)</span><span class="news-item__title">혼돈의 전장에서 생존에 직결되는 정보를 취사선택하는 능력. 변하는 전황을 파악하여 가장 합리적인 다음 행동을 도출하는 통찰력입니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">의지<br>(Discipline)</span><span class="news-item__title">절망적인 상황에서도 무너지지 않고 자신과 동료를 지탱하는 정신력. 동료의 죽음 앞에서도 전투를 포기하지 않는 이타적인 용기입니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">투지<br>(Rage)</span><span class="news-item__title">거인을 향한 불타는 증오이자, 죽음의 공포를 밀어내는 생존 본능. 궁지에 몰릴수록 더욱 강해지는 처절한 저항 정신입니다.</span></div>
+                </section>
+            </div>
+
+            <!-- 2. 캐릭터 생성 콘텐츠 -->
+            <div class="system-content" data-tab-content="creation">
+                <section class="news-list">
+                    <div class="news-item"><span class="news-item__category">신병<br>(Rookie)</span><span class="news-item__title">능력치(<strong>+2, +1, +1, +0, -1</strong>) 배분, 이름만 결정합니다.<br><strong>행운은 0</strong>에서 시작하며, 레벨 1이 될 때까지 기본 기술만 사용하고 <strong>항상 표적 상태</strong>로 전투를 시작합니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">정식 병사<br>(Advanced)</span><span class="news-item__title">이름, 성, 배경, 성격을 모두 정하고 <strong>레벨 1</strong>에서 시작합니다.<br><strong>행운은 2</strong>에서 시작하며, 병과를 선택하고 시작 기술 2개를 모두 얻습니다.</span></div>
+                </section>
+            </div>
+
+            <!-- 3. 장비 및 규칙 콘텐츠 -->
+            <div class="system-content" data-tab-content="rules">
+                <section class="news-list">
+                    <div class="news-item"><span class="news-item__category">기본 판정</span><span class="news-item__title">주사위 2개(2d6)를 굴려 나온 값에 자신의 능력치를 더합니다.<br><ul><li><strong>10 이상:</strong> 완전한 성공</li><li><strong>7-9:</strong> 대가를 치르는 성공 (부분 성공)</li><li><strong>6 이하:</strong> 실패</li></ul></span></div>
+                    <div class="news-item"><span class="news-item__category">기본 장비</span><span class="news-item__title"><strong>입체기동장치</strong>와 <strong>초경질 블레이드 2자루</strong>를 기본으로 휴대합니다.<br>칼날은 소모품이며, 여러 개의 교체용 칼날을 함께 소지합니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">행운<br>(Luck)</span><span class="news-item__title">판정 직후, 결과를 확인하고 나서 <strong>행운 1</strong>을 소모하여 최종 결과를 최대 12까지 높일 수 있습니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">표적<br>(Mark)</span><span class="news-item__title">죽음의 위기에 직접 노출되었음을 의미합니다. 거인을 공격하거나, 거인에게 공격당하기 위해서는 반드시 <strong>'표적'</strong> 상태가 되어야 합니다.</span></div>
+                </section>
+            </div>
+
+            <!-- 4. 거인 및 전투 콘텐츠 -->
+            <div class="system-content" data-tab-content="combat">
+                <section class="news-list">
+                    <div class="news-item"><span class="news-item__category">거인 사냥법</span><span class="news-item__title">먼저 거동을 방해하여 자세를 무너뜨린 후 (결정타 1회 성공), 드러난 약점(목덜미)을 노려야 합니다 (결정타 2회 성공). 매 공격 시 <strong>'표적'</strong> 상태가 필요합니다.</span></div>
+                    <div class="news-item"><span class="news-item__category">특수 거인</span><span class="news-item__title"><strong>기행종, 갑옷 거인, 재생 특화 거인, 지성 거인</strong> 등 다양한 특수 개체가 존재하며, 일반적인 방법으로는 상대하기 어렵습니다.</span></div>
+                </section>
+            </div>
+
+            <!-- 5. 기본 기술 콘텐츠 -->
+            <div class="system-content" data-tab-content="moves">
+                <section class="news-list">
+                    <div class="news-item"><span class="news-item__category">진입</span><span class="news-item__title">입체기동장치로 거인을 공격할 위치를 확보하려 할 때 [입체기동술] 판정.<ul><li><strong>10+:</strong> 거인을 표적으로 만듭니다.</li><li><strong>7-9:</strong> 거인을 표적으로 만들지만 대가를 치릅니다.</li></ul></span></div>
+                    <div class="news-item"><span class="news-item__category">결정타</span><span class="news-item__title">표적이 된 거인에게 치명타를 날리려 할 때 [토벌기술] 판정.<ul><li><strong>10+:</strong> 거인에게 피해를 줍니다 (혹은 구축).</li><li><strong>7-9:</strong> 성공하지만 대가를 치릅니다.</li></ul></span></div>
+                    <div class="news-item"><span class="news-item__category">죽음 극복</span><span class="news-item__title">치명적인 위험에서 벗어나려 할 때 [투지] 판정.<ul><li><strong>10+:</strong> 위기에서 벗어납니다.</li><li><strong>7-9:</strong> 힘겹게 생존하지만 상황이 악화됩니다.</li><li><strong>6-:</strong> 죽습니다.</li></ul></span></div>
+                </section>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="c-footer">
+        <p class="c-footer__copyright">Ⓒ 거인 세계 TRPG (Your Name or Circle Name)</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainTabs = document.querySelectorAll('#system-tabs .c-tabmenu__link');
+            const mainContents = document.querySelectorAll('#system-content-area > .system-content');
+
+            function activateMainTab(tab) {
+                const targetContentId = tab.getAttribute('data-tab');
+                mainTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                mainContents.forEach(content => {
+                    content.classList.toggle('visible', content.getAttribute('data-tab-content') === targetContentId);
+                });
+            }
+            mainTabs.forEach(tab => {
+                tab.addEventListener('click', (e) => { e.preventDefault(); activateMainTab(tab); });
+            });
+
+            if (mainTabs.length > 0) activateMainTab(mainTabs[0]);
+        });
+    </script>
+</body>
+</html>

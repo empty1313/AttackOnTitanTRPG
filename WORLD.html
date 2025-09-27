@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자유의 날개 - 세계관</title>
+
+<!-- 1. 모든 폰트 서버에 최대한 빨리 연결 신호를 보냄 (Preconnect) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <!-- 2. 모든 폰트 CSS 파일을 병렬로, 우선적으로 불러옴 (@import 제거) -->
+    <!-- 구글 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Nanum+Myeongjo:wght@400;700&family=Zen+Kaku+Gothic+Antique:wght@500;700&display=block" rel="stylesheet">
+    <!-- 아이콘 폰트 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sygnas/font-arrows@1.5.0/style.css">
+    
+    <!-- 3. 메인 스타일시트 링크 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ===== 로딩 오버레이 시작 ===== -->
+    <div id="loading-overlay" class="hidden">
+        <div class="spinner"></div>
+    </div>
+    <!-- ===== 로딩 오버레이 끝 ===== -->
+
+    <!-- ===== 모바일 메뉴 패널 ===== -->
+    <div class="c-mobile-nav">
+        <button type="button" class="c-mobile-nav__close-btn" aria-label="메뉴 닫기">&times;</button>
+        <nav>
+            <ul class="c-mobile-nav__menu">
+                <li><a href="HOME.html" class="c-mainmenu__link">HOME</a></li>
+                <li><a href="WORLD.html" class="c-mainmenu__link">WORLD</a></li>
+                <li><a href="SYSTEM.html" class="c-mainmenu__link">SYSTEM</a></li>
+                <li><a href="CLASSES(미완).html" class="c-mainmenu__link">CLASSES</a></li>
+                <li><a href="SPECIAL.html" class="c-mainmenu__link">SPECIAL</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- ===== 모바일 메뉴 패널 끝 ===== -->
+     
+    <header class="c-header">
+        <h1 class="c-header__logo"><a href="HOME.html"><img src="images/logo.png" alt="자유의 날개"></a></h1>        <!-- [추가] 햄버거 메뉴 버튼 -->
+        <button type="button" class="c-hamburger-btn" aria-label="메뉴 열기">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="c-pc-nav">
+            <ul class="c-mainmenu">
+                <li><a href="HOME.html" class="c-mainmenu__link">HOME</a></li>
+                <li><a href="WORLD.html" class="c-mainmenu__link active">WORLD</a></li>
+                <li><a href="SYSTEM.html" class="c-mainmenu__link">SYSTEM</a></li>
+                <li><a href="CLASSES(미완).html" class="c-mainmenu__link">CLASSES</a></li>
+                <li><a href="SPECIAL.html" class="c-mainmenu__link">SPECIAL</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="l-wrapper" id="main-content">
+        <h1 class="c-content-title">
+            <span class="c-content-title__en">WORLD</span>
+            <span class="c-content-title__ja">세계관</span>
+        </h1>
+
+        <!-- 프롤로그 섹션 (오른쪽 정렬) -->
+        <section class="intro-story__intro-container">
+            <div class="intro-story__intro-content">
+                <div class="intro-story__catch">
+                    그날, 인류는 떠올렸다.<br>놈들에게 지배당해 왔던 공포를.<br>새장 속에서 갇혀만 살았었던 굴욕을.
+                </div>
+                <div class="intro-story__text">
+                    <p></p>
+                    <p>845년.</p>
+                    <p>백여 년의 거짓된 평화를 좀먹고 나타난 초대형 거인과 갑옷 거인의 앞에서, 인류의 가장 바깥쪽 방벽이던 월 마리아는 허무하게 무너져 내렸다. 인류는 영토의 3분의 1과 인구의 2할을 상실했으며, 살아남은 자들은 가축처럼 월 로제 안으로 내몰렸다.</p>
+                    <p>생존 구역은 좁아졌고, 자원은 바닥을 드러내고 있다. 피난민과 기존 거주민 사이의 반목은 끊이지 않으며, 벽 안의 인류는 보이지 않는 내전의 문턱에 서 있다. </p>
+                    <p>귀족과 왕정은 여전히 높은 벽 안에서 현실을 외면하고, 성벽을 지켜야 할 주둔병단은 눈앞의 공포에 무력하게 얼어붙었으며, 가장 안전한 후방의 헌병단은 그 혼란을 비웃듯 부패한 권력에 기생하며 자신들의 배를 불릴 뿐이었다.</p>
+                    <p>이 절망의 시대에, 역설적인 기회를 맞이한 조직이 있다.<br>바로, 인류의 자유를 외치며 벽 밖으로 향했던 미치광이 집단, 조사병단.</p>
+                    <p>지금까지 '세금 낭비', '죽으러 가는 자들'이라 조롱받던 그들이었다. 그러나 이제 인류는 깨달았다. 벽 안에 웅크리고 있는 것만으로는 결코 생존할 수 없다는 사실을. 거인의 위협이 턱밑까지 차오른 지금, 조사병단에 대한 전 인류의 관심이 이례적으로 늘어났다.</p>
+                    <p>조사병단의 날개는 이제, 인류의 마지막 저항의 상징이 되었다. 그러나 그만큼, 매 탐사마다 요구되는 성과는 더욱 가혹해졌고, 죽음은 더욱 흔해졌다. </p>
+                    <p>인류의 한 걸음을 위해 심장을 바쳐야 하는 시대, 자유의 날개는 가장 먼저 꺾여나갈 숙명을 짊어졌다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 시놉시스 섹션 (왼쪽 정렬) -->
+        <section class="intro-story__story-container" style="margin-top: 4rem;">
+            <div class="intro-story__story-content">
+                <h2 class="c-section-title">SYNOPSIS</h2>
+                <div class="intro-story__text">
+                    <p>선택의 시간은 끝났다.<br>당신은 기어코 이 혼돈의 한복판에서, 스스로의 손으로 조사병단의 문을 열어젖혔다.</p>
+                    <p>잿더미로 변한 고향에 피의 복수를 맹세했는가.<br>지독한 허기를 견디다 못해 죽음의 도박에 몸을 던졌는가.<br>혹은, 모두가 외면한 인류의 미래를 홀로 믿는 마지막 이상주의자인가.</p>
+                    <p>그 동기가 무엇이든, 이제 당신의 등에는 인류 최후의 저항을 상징하는 자유의 날개가 낙인처럼 새겨졌다.</p>
+                    <p>이곳에 영광스러운 영토 탈환이란 없다.<br>남겨진 임무는 오직 하나, 거인의 그림자가 배회하는 폐허 속에서 다음 호흡을 약속할 희망의 편린을 찾아내는 것. 때로는 고작 한 줌의 보급품, 단 한 줄의 정보를 위해, 싸늘하게 식어가는 동료의 시신을 등져야 할지도 모른다.</p>
+                    <p>대지를 뒤흔드는 거인의 발소리, 허공에 흩어지는 동료의 단말마, 목덜미를 훑는 서늘한 죽음의 예감, 그리고 바닥을 드러낸 가스통의 무게. 당신은 이 모든 것을 짊어지고서, 당신의 칼날이 아직 꺾이지 않았음을 증명해야 한다.</p>
+                    <p>다시 한번 묻는다.<br>이 지옥도 속에서, 당신은 무엇을 위해 칼을 드는가?<br>꺼져가는 불씨 같은 인류를 위한 숭고한 희생인가? 스러져간 동료들을 향한 속죄인가? 혹은, 그저 하루 더 목숨을 부지하려는 본능인가?</p>
+                    <p>벽 너머에서 기다리는 진실이 구원일지, 더 깊은 나락일지는,<br>오직 당신의 칼끝만이 답할 것이다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 이미지 갤러리 -->
+        <div class="intro-story__gallery">
+            <img src="images/stroy_1.png" alt="거대한 벽의 모습">
+            <img src="images/stroy_2.png" alt="입체기동장치로 비행하는 병사들">
+            <img src="images/stroy_3.png" alt="거인과의 처절한 전투 장면">
+            <img src="images/stroy_4.jpg" alt="벽 안 도시의 평화로운 풍경">
+        </div>
+
+    </main>
+
+    <footer class="c-footer">
+        <p class="c-footer__copyright">
+    본 사이트는 원작 '진격의 거인'과 기존 팬메이드 TRPG 시스템을 기반으로 한 비영리 2차 창작 프로젝트입니다.<br>
+    '진격의 거인' ©Hajime Isayama, KODANSHA/"ATTACK ON TITAN" The Final Season Production Committee. All Rights Reserved.<br>
+    원작자 측의 요청이 있을 시 본 사이트는 예고 없이 비공개 처리될 수 있습니다.
+</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+
+</body>
+</html>
